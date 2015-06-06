@@ -1,0 +1,17 @@
+{
+    "name": "baohx2000/apitude",
+    "description": "Yet another API framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gordon Forsythe",
+            "email": "baohx2000@gmail.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "require": {
+      "baohx2000/doc": "v0.1.0"
+    }
+}
