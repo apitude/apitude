@@ -13,5 +13,14 @@
     "minimum-stability": "dev",
     "require": {
       "baohx2000/doc": "v0.1.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "~4",
+      "silex/silex": "~1"
+    },
+    "autoload": {
+      "psr-4": {
+        "B2k\\Apitude\\": "src/"
+      }
     }
 }
