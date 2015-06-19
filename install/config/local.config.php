@@ -1,4 +1,6 @@
 <?php
+define('APP_PATH', realpath(__DIR__.'/..'));
+define('APP_ENV', 'development');
 return [
     // Database connection options
     'db.options' => [
