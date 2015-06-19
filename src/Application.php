@@ -80,6 +80,11 @@ class Application extends \Silex\Application {
         foreach ($this->shutdownServices as $service) {
             $service->shutdown();
         }
+    }
 
+    public function runConsole()
+    {
+        $this['console']->run();
+        $this->shutdown();
     }
 }

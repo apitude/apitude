@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+/*
+ * @codingStandardsIgnoreFile
+ */
+if (! defined('APP_PATH')) {
+    throw new \RuntimeException('APP_PATH must be defined to run apicon.  You can do so by running
+    "APP_PATH=/your/application ./vendor/bin/apicon ...');
+}
+defined('APP_ENV') OR define('APP_ENV', 'development');
+
+require_once APP_PATH.'/vendor/autoload.php';
+$boot = new \B2k\Apitude\Bootstrap();
+$app = $boot->createApplication();
+$app->runConsole();

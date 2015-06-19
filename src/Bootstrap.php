@@ -1,6 +1,11 @@
 <?php
 namespace B2k\Apitude;
 
+use B2k\Doc\DocServiceProvider;
+use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Silex\Provider\DoctrineServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
+
 class Bootstrap
 {
     public function __construct()
@@ -16,5 +21,30 @@ class Bootstrap
         if (! is_dir(APP_PATH)) {
             throw new \RuntimeException('APP_PATH ('.APP_PATH.') is not a directory');
         }
+    }
+
+    /**
+     * @return Application
+     */
+    public function createApplication()
+    {
+        $config = require(APP_PATH.'/config/local.config.php');
+
+        $app = new Application($config);
+        $app->register(new UrlGeneratorServiceProvider);
+        $app->register(
+            new DoctrineServiceProvider,
+            $config['db.options']
+        );
+        $app->register(
+            new DoctrineOrmServiceProvider,
+            $config['doctrine.options']
+        );
+        $app->register(
+            new DocServiceProvider,
+            $config['migrations.directory']
+        );
+
+        return $app;
     }
 }
