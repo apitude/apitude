@@ -42,7 +42,7 @@ class Bootstrap
         );
         $app->register(
             new DocServiceProvider,
-            $config['migrations.directory']
+            $config
         );
 
         return $app;
