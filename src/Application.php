@@ -36,7 +36,9 @@ class Application extends \Silex\Application {
         $this[self::CONFIG_KEY] = $config;
         $this['cache_dir'] = APP_PATH . '/tmp';
 
-        $this->addConfiguredServices($config['configuration.services']);
+        if (array_key_exists('configuration.services', $config)) {
+            $this->addConfiguredServices($config['configuration.services']);
+        }
     }
 
     public function addConfiguredServices($services) {

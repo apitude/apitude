@@ -9,5 +9,8 @@ if (!defined('APP_ENV')) {
 }
 
 if (!defined('APP_PATH')) {
-    define('APP_PATH', realpath(__DIR__.'/..'));
+    define('APP_PATH', realpath(__DIR__));
 }
+
+$bs = new \B2k\Apitude\Bootstrap();
+return $bs->createApplication();
