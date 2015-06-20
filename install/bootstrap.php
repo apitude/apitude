@@ -13,4 +13,9 @@ if (!defined('APP_PATH')) {
 }
 
 $bs = new \B2k\Apitude\Bootstrap();
-return $bs->createApplication();
+$app = $bs->createApplication();
+
+// add extra service providers here
+
+$app->boot();
+return $app;
