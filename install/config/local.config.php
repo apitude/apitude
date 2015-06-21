@@ -29,5 +29,10 @@ return [
         // add class names of other service providers you wish to register here
         // as keys, and configuration you wish to be passed to them as the value.
         // example : MyServiceProvider::class => ['configKey' => 37, ...]
+    ],
+    'cache.driver' => 'redis', // or preferably xcache if you have it installed as it keeps metadata in-memory
+    'redis' => [
+        'host' => 'localhost',
+        'port' => 6379
     ]
 ];
