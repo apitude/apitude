@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/baohx2000/apitude/badges/gpa.svg)](https://codeclimate.com/github/baohx2000/apitude)
+
 SETUP
 =====
 
