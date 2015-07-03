@@ -5,7 +5,8 @@ use B2k\Apitude\Provider\ContainerAwareInterface;
 use B2k\Apitude\Provider\ShutdownInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class Application extends \Silex\Application {
+class Application extends \Silex\Application
+{
     const CONFIG_KEY = 'config';
     const DEBUG_KEY  = 'debug';
     const ENV_DEVELOPMENT = 'development';
@@ -16,7 +17,8 @@ class Application extends \Silex\Application {
      */
     protected $shutdownServices = [];
 
-    function __construct($config, $values = []) {
+    public function __construct($config, $values = [])
+    {
         if (empty($values)) {
             $values = [
                 self::DEBUG_KEY => (APP_ENV !== self::ENV_PRODUCTION)
@@ -41,20 +43,24 @@ class Application extends \Silex\Application {
         }
     }
 
-    public function addConfiguredServices($services) {
-        if (!is_array($services)) return;
+    public function addConfiguredServices($services)
+    {
+        if (!is_array($services)) {
+            return;
+        }
 
         foreach ($services as $service => $val) {
             if (isset($this[$service])) {
                 unset($this[$service]);
             }
-            $this[$service] = function() use ($val) {
+            $this[$service] = function () use ($val) {
                 return $this->createInvokable($val);
             };
         }
     }
 
-    private function createInvokable($service) {
+    private function createInvokable($service)
+    {
         if (strpos($service, '::') !== false) {
             $instance = call_user_func($service, $this);
         } else {
@@ -70,7 +76,8 @@ class Application extends \Silex\Application {
         return $instance;
     }
 
-    public function run(Request $request = null) {
+    public function run(Request $request = null)
+    {
         parent::run($request);
         $this->shutdown();
     }
@@ -78,7 +85,8 @@ class Application extends \Silex\Application {
     /**
      * Called after request is finished for extra service functionality
      */
-    public function shutdown() {
+    public function shutdown()
+    {
         foreach ($this->shutdownServices as $service) {
             $service->shutdown();
         }
