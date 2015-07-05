@@ -31,6 +31,8 @@ return [
         // example : MyServiceProvider::class => ['configKey' => 37, ...]
     ],
     'cache.driver' => 'redis', // or preferably xcache if you have it installed as it keeps metadata in-memory
+    // You may include a cache.redis array including "host" and "port" if you do not wish to use the default redis
+    // configuration
     'redis' => [
         'host' => 'localhost',
         'port' => 6379

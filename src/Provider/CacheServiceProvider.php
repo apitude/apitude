@@ -29,7 +29,13 @@ class CacheServiceProvider implements ServiceProviderInterface
                     return new ArrayCache();
                 case 'redis':
                     $cache = new RedisCache();
-                    $cache->setRedis($app['redis']);
+                    if (isset($config['cache.redis'])) {
+                        $redis = new \Redis();
+                        $redis->connect($config['cache.redis']['host'], $config['cache.redis']['port']);
+                        $cache->setRedis($redis);
+                    } else {
+                        $cache->setRedis($app['redis']);
+                    }
                     return $cache;
                 case 'xcache':
                     return new XcacheCache();
