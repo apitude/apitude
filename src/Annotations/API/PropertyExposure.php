@@ -11,7 +11,7 @@ use Doctrine\Common\Annotations\Annotation;
  */
 final class PropertyExposure extends Annotation
 {
-    public $exposure;
+    public $exposure = true;
 
     public function isExposed()
     {
