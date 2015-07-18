@@ -20,6 +20,9 @@ class DoctrineServiceProvider implements ServiceProviderInterface
     {
         $app->register(new \Silex\Provider\DoctrineServiceProvider, $app['config']['db.options']);
         $app->register(new DoctrineOrmServiceProvider, $app['config']['doctrine.options']);
+        $app['em'] = $app->share(function ($app) {
+            return $app['orm.ems.default'];
+        });
     }
 
     /**
