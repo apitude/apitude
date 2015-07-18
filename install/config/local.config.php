@@ -14,6 +14,12 @@ return [
             'mappings' => [
                 [
                     'type' => 'annotation',
+                    'namespace' => 'B2k\Apitude\Entities',
+                    'path' => APP_PATH.'/vendor/baohx2000/apitude/src/Entities',
+                    'use_simple_annotation_reader' => false,
+                ],
+                [
+                    'type' => 'annotation',
                     'namespace' => 'YOURAPPLICATION\Entities',
                     'path' => APP_PATH.'/src/Entities',
                     'use_simple_annotation_reader' => false,
