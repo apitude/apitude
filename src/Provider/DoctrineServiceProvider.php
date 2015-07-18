@@ -2,6 +2,7 @@
 namespace B2k\Apitude\Provider;
 
 
+use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -20,9 +21,9 @@ class DoctrineServiceProvider implements ServiceProviderInterface
     {
         $app->register(new \Silex\Provider\DoctrineServiceProvider, $app['config']['db.options']);
         $app->register(new DoctrineOrmServiceProvider, $app['config']['doctrine.options']);
-        $app['em'] = $app->share(function ($app) {
-            return $app['orm.ems.default'];
-        });
+        $app->register(new MigrationServiceProvider, [
+            'db.migrations.path' =>$app['config']['migrations.directory'],
+        ]);
     }
 
     /**

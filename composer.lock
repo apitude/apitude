@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2625d966dafd344c74277c39ece2afa0",
+    "hash": "04e5c624a007e23acffaacc23381c58c",
     "packages": [
+        {
+            "name": "dbtlr/silex-doctrine-migrations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dbtlr/silex-doctrine-migrations.git",
+                "reference": "126a6901b831be4f3bc168b77134ed79a567d6a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dbtlr/silex-doctrine-migrations/zipball/126a6901b831be4f3bc168b77134ed79a567d6a7",
+                "reference": "126a6901b831be4f3bc168b77134ed79a567d6a7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "doctrine/migrations": "1.0.*@dev",
+                "knplabs/console-service-provider": "~1.0",
+                "php": ">=5.3.2",
+                "silex/silex": "~1.2"
+            },
+            "suggest": {
+                "dflydev/doctrine-orm-service-provider": "1.0.x-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dbtlr\\MigrationProvider\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Drew Butler",
+                    "homepage": "http://dbtlr.com"
+                }
+            ],
+            "description": "Doctrine migration service provider for Silex",
+            "homepage": "http://github.com/dbtlr/silex-doctrine-migrations",
+            "keywords": [
+                "doctrine2",
+                "migration",
+                "silex"
+            ],
+            "time": "2015-05-22 12:05:26"
+        },
         {
             "name": "dflydev/doctrine-orm-service-provider",
             "version": "v1.0.6",
@@ -783,6 +832,48 @@
                 "yaml"
             ],
             "time": "2014-07-12 07:13:19"
+        },
+        {
+            "name": "knplabs/console-service-provider",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/ConsoleServiceProvider.git",
+                "reference": "1f1a3315409814d01702a47a8823549c6996de41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/ConsoleServiceProvider/zipball/1f1a3315409814d01702a47a8823549c6996de41",
+                "reference": "1f1a3315409814d01702a47a8823549c6996de41",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/console": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Knp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Knplabs",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "console service provider for Silex",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "console",
+                "silex"
+            ],
+            "time": "2013-06-13 12:43:39"
         },
         {
             "name": "pimple/pimple",
@@ -2783,7 +2874,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "dbtlr/silex-doctrine-migrations": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
