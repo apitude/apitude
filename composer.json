@@ -1,29 +1,32 @@
 {
-    "name": "baohx2000/apitude",
-    "description": "Yet another API framework",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Gordon Forsythe",
-            "email": "baohx2000@gmail.com"
-        }
-    ],
-    "prefer-stable": true,
-    "bin" : ["apicon"],
-    "minimum-stability": "dev",
-    "require": {
-      "baohx2000/doc": "v0.1.0",
-      "silex/silex": "~1",
-        "jms/metadata": "~1"
-    },
-    "require-dev": {
-      "phpunit/phpunit": "~4",
-        "codeception/codeception": "*"
-    },
-    "autoload": {
-      "psr-4": {
-        "B2k\\Apitude\\": "src/"
-      }
+  "name": "baohx2000/apitude",
+  "description": "Yet another API framework",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Gordon Forsythe",
+      "email": "baohx2000@gmail.com"
     }
+  ],
+  "prefer-stable": true,
+  "bin": [
+    "apicon"
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "doctrine/orm": "~2",
+    "doctrine/migrations": "~1",
+    "silex/silex": "~1",
+    "jms/metadata": "~1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4",
+    "codeception/codeception": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "B2k\\Apitude\\": "src/"
+    }
+  }
 }
