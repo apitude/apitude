@@ -17,6 +17,7 @@
   "require": {
     "doctrine/orm": "~2",
     "doctrine/migrations": "~1",
+    "dflydev/doctrine-orm-service-provider": "~1",
     "silex/silex": "~1",
     "jms/metadata": "~1"
   },

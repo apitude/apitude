@@ -1,9 +1,7 @@
 <?php
 namespace B2k\Apitude;
 
-use B2k\Doc\DocServiceProvider;
-use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
-use Silex\Provider\DoctrineServiceProvider;
+use B2k\Apitude\Provider\DoctrineServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 
 class Bootstrap
@@ -32,18 +30,7 @@ class Bootstrap
 
         $app = new Application($config);
         $app->register(new UrlGeneratorServiceProvider);
-        $app->register(
-            new DoctrineServiceProvider,
-            $config['db.options']
-        );
-        $app->register(
-            new DoctrineOrmServiceProvider,
-            $config['doctrine.options']
-        );
-        $app->register(
-            new DocServiceProvider,
-            $config
-        );
+        $app->register(new DoctrineServiceProvider);
 
         return $app;
     }
