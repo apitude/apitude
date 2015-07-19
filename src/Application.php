@@ -93,9 +93,14 @@ class Application extends \Silex\Application
 
     public function boot()
     {
-        parent::boot();
-        if (php_sapi_name() === 'cli' && isset($this['config']['commands'])) {
-            $this->registerCommands($this['config']['commands']);
+        if (!$this->booted) {
+            parent::boot();
+            if ($this instanceof \Knp\Console\Application) {
+                return;
+            }
+            if (php_sapi_name() === 'cli' && isset($this['config']['commands'])) {
+                $this->registerCommands($this['config']['commands']);
+            }
         }
     }
 
