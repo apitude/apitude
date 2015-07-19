@@ -49,7 +49,7 @@ trait StampEntityTrait
      * @param User $createdBy
      * @return StampEntityTrait
      */
-    public function setCreatedBy($createdBy)
+    public function setCreatedBy(User $createdBy = null)
     {
         $this->createdBy = $createdBy;
         return $this;
@@ -67,7 +67,7 @@ trait StampEntityTrait
      * @param User $modifiedBy
      * @return StampEntityTrait
      */
-    public function setModifiedBy($modifiedBy)
+    public function setModifiedBy(User $modifiedBy = null)
     {
         $this->modifiedBy = $modifiedBy;
         return $this;
@@ -85,7 +85,7 @@ trait StampEntityTrait
      * @param \DateTime $created
      * @return StampEntityTrait
      */
-    public function setCreated($created)
+    public function setCreated(\DateTime $created)
     {
         $this->created = $created;
         return $this;
@@ -103,7 +103,7 @@ trait StampEntityTrait
      * @param \DateTime $modified
      * @return StampEntityTrait
      */
-    public function setModified($modified)
+    public function setModified(\DateTime $modified)
     {
         $this->modified = $modified;
         return $this;

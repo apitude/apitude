@@ -8,8 +8,8 @@ interface StampEntityInterface
 {
     public function setCreated(\DateTime $dateTime);
     public function setModified(\DateTime $dateTime);
-    public function setCreatedBy(User $user);
-    public function setModifiedBy(User $user);
+    public function setCreatedBy(User $user = null);
+    public function setModifiedBy(User $user = null);
 
     public function getCreated();
     public function getModified();
