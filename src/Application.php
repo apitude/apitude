@@ -38,12 +38,27 @@ class Application extends \Silex\Application
         $this[self::CONFIG_KEY] = $config;
         $this['cache_dir'] = APP_PATH . '/tmp';
 
+        if (array_key_exists('service_providers', $config)) {
+            $this->registerServiceProviders($config['service_providers']);
+        }
+
         if (array_key_exists('configuration.services', $config)) {
             $this->addConfiguredServices($config['configuration.services']);
         }
     }
 
-    public function addConfiguredServices($services)
+    private function registerServiceProviders(array $providers)
+    {
+        foreach ($providers as $class => $config)
+        {
+            if (is_numeric($class)) {
+                throw new \RuntimeException('Bad service provider configuration');
+            }
+            $this->register(new $class(), $config ?: []);
+        }
+    }
+
+    private function addConfiguredServices($services)
     {
         if (!is_array($services)) {
             return;

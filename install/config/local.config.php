@@ -2,6 +2,10 @@
 use B2k\Apitude\EntityServices\StampSubscriber;
 
 return [
+    // Add any extra configuration services to be registered here
+    'configuration.services' => [
+        // [class => config]
+    ],
     // Database connection options
     'db.options' => [
         'driver' => 'pdo_mysql',
