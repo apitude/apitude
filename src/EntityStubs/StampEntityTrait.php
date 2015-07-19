@@ -25,13 +25,15 @@ trait StampEntityTrait
 
     /**
      * @var User
-     * @ORM\OneToOne(mappedBy="create_user_id", targetEntity="User")
+     * @ORM\OneToOne(targetEntity="\B2k\Apitude\Entities\User")
+     * @ORM\JoinColumn(name="create_user_id", referencedColumnName="id")
      */
     private $createdBy;
 
     /**
      * @var User
-     * @ORM\OneToOne(mappedBy="modify_user_id", targetEntity="User")
+     * @ORM\OneToOne(targetEntity="\B2k\Apitude\Entities\User")
+     * @ORM\JoinColumn(name="modify_user_id", referencedColumnName="id")
      */
     private $modifiedBy;
 }
