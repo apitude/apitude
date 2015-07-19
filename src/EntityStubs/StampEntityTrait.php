@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Class StampEntityTrait
  * @package EntityStubs
  * @ORM\Entity
+ * @method setCreated(\DateTime $dateTime)
+ * @method setModified(\DateTime $dateTime)
  */
 trait StampEntityTrait
 {

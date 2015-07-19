@@ -1,4 +1,6 @@
 <?php
+use B2k\Apitude\EntityServices\StampSubscriber;
+
 return [
     // Database connection options
     'db.options' => [
@@ -26,6 +28,9 @@ return [
                 ]
             ]
         ]
+    ],
+    'orm.subscribers' => [
+        StampSubscriber::class,
     ],
     // Note that Migrations is NOT inside src.  This is because it does not and should not
     // contain any application logic, and therefore is separate from the application.

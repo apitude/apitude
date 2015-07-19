@@ -2,8 +2,10 @@
 namespace B2k\Apitude\Provider;
 
 
+use B2k\Apitude\EntityServices\StampSubscriber;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Doctrine\Common\EventManager;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -42,6 +44,13 @@ class DoctrineServiceProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        // noop
+        $config = $app['config'];
+        if (isset($config['orm.subscribers'])) {
+            /** @var EventManager $eventMgr */
+            $eventMgr = $app['db.event_manager'];
+            foreach ($config['orm.subscribers'] as $class) {
+                $eventMgr->addEventSubscriber(new $class());
+            }
+        }
     }
 }
