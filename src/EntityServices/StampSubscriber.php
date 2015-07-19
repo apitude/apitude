@@ -2,7 +2,7 @@
 namespace B2k\Apitude\EntityServices;
 
 
-use B2k\Apitude\EntityStubs\StampEntityTrait;
+use B2k\Apitude\EntityStubs\StampEntityInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -27,17 +27,17 @@ class StampSubscriber implements EventSubscriber
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
-        if ($entity instanceof StampEntityTrait) {
+        if ($entity instanceof StampEntityInterface) {
             $entity->setCreated(new \DateTime());
             $entity->setModified(new \DateTime());
-            // @TODO set create user
+            // @TODO set create/modify user
         }
     }
 
     public function preUpdate(PreUpdateEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
-        if ($entity instanceof StampEntityTrait) {
+        if ($entity instanceof StampEntityInterface) {
             $entity->setModified(new \DateTime());
             // @TODO set modify user
         }
