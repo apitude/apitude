@@ -91,6 +91,24 @@ class Application extends \Silex\Application
         return $instance;
     }
 
+    public function boot()
+    {
+        parent::boot();
+        if (php_sapi_name() === 'cli' && isset($this['config']['commands'])) {
+            $this->registerCommands($this['config']['commands']);
+        }
+    }
+
+    private function registerCommands(array $commands)
+    {
+        /** @var \Knp\Console\Application $console */
+        $console = $this['console'];
+        foreach ($commands as $class => $config)
+        {
+            $console->add(new $class($config));
+        }
+    }
+
     public function run(Request $request = null)
     {
         parent::run($request);
