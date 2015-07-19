@@ -8,7 +8,7 @@ return [
         'password' => 'root',
         'host' => '127.0.0.1',
     ],
-    'doctrine.options' => [
+    'orm.options' => [
         'orm.proxies_dir' => APP_PATH.'/tmp/proxies',
         'orm.em.options' => [
             'mappings' => [

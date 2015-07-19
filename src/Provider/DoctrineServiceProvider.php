@@ -19,9 +19,15 @@ class DoctrineServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        $app->register(new \Silex\Provider\DoctrineServiceProvider, $app['config']['db.options']);
-        $app->register(new DoctrineOrmServiceProvider, $app['config']['doctrine.options']);
-        $app->register(new MigrationServiceProvider, [
+        $app->register(
+            new \Silex\Provider\DoctrineServiceProvider(),
+            ['db.options' => $app['config']['db.options']]
+        );
+        $app->register(
+            new DoctrineOrmServiceProvider(),
+            $app['config']['orm.options']
+        );
+        $app->register(new MigrationServiceProvider(), [
             'db.migrations.path' =>$app['config']['migrations.directory'],
         ]);
     }
