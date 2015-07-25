@@ -109,9 +109,9 @@ class Application extends \Silex\Application
     {
         /** @var \Knp\Console\Application $console */
         $console = $this['console'];
-        foreach ($commands as $class => $config)
+        foreach ($commands as $class)
         {
-            $console->add(new $class($config));
+            $console->add(new $class);
         }
     }
 

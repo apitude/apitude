@@ -26,7 +26,7 @@ class CommandServiceProvider implements ServiceProviderInterface
                 'console.project_directory' => APP_PATH,
             ]);
             $app['base_commands'] = [
-                ListCommand::class => [],
+                ListCommand::class,
             ];
         }
     }

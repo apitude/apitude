@@ -52,7 +52,7 @@ return [
 
     // commands to register
     'commands' => [
-        // [class => config]
+        // [class]
     ],
     'cache.driver' => 'redis', // or preferably xcache if you have it installed as it keeps metadata in-memory
     // You may include a cache.redis array including "host" and "port" if you do not wish to use the default redis

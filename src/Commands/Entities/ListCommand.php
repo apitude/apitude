@@ -12,6 +12,7 @@ class ListCommand extends BaseCommand
 {
     public function configure()
     {
+        $this->setName('entity:list');
         parent::configure();
 
         $this->addArgument('Entity Name');
