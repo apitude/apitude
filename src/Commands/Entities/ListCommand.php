@@ -31,13 +31,13 @@ class ListCommand extends BaseCommand
         /** @var EntityManagerInterface $em */
         $em = $app['orm.em'];
         $qb = $em->createQueryBuilder()->from($entity, 'main');
-        if ($input->hasOption('limit')) {
+        if ($input->getOption('limit')) {
             $qb->setMaxResults($input->getOption('limit'));
-            if ($input->hasOption('start')) {
+            if ($input->getOption('start') !== null) {
                 $qb->setFirstResult($input->getOption('start'));
             }
         }
-        if ($input->hasOption('filter')) {
+        if ($input->getOption('filter')) {
             $qb->where($input->getOption('filter'));
         }
         $results = $qb->getQuery()->getArrayResult();
