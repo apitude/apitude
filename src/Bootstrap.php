@@ -1,6 +1,7 @@
 <?php
 namespace B2k\Apitude;
 
+use B2k\Apitude\Provider\CommandServiceProvider;
 use B2k\Apitude\Provider\DoctrineServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
@@ -32,13 +33,7 @@ class Bootstrap
         $app = new Application($config);
         $app->register(new UrlGeneratorServiceProvider);
         $app->register(new DoctrineServiceProvider);
-        if (php_sapi_name() === 'cli') {
-            $app->register(new ConsoleServiceProvider, [
-                'console.name' => 'Apitude',
-                'console.version' => '1.0.0',
-                'console.project_directory' => APP_PATH,
-            ]);
-        }
+        $app->register(new CommandServiceProvider);
 
         return $app;
     }

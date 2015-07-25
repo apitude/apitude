@@ -2,7 +2,6 @@
 namespace B2k\Apitude\Provider;
 
 
-use B2k\Apitude\EntityServices\StampSubscriber;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Doctrine\Common\EventManager;
