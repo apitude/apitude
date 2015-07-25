@@ -100,6 +100,7 @@ class Application extends \Silex\Application
             }
             if (php_sapi_name() === 'cli' && isset($this['config']['commands'])) {
                 $this->registerCommands($this['config']['commands']);
+                $this->registerCommands($this['base_commands']);
             }
         }
     }

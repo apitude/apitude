@@ -25,6 +25,9 @@ class CommandServiceProvider implements ServiceProviderInterface
                 'console.version' => '1.0.0',
                 'console.project_directory' => APP_PATH,
             ]);
+            $app['base_commands'] = [
+                ListCommand::class => [],
+            ];
         }
     }
 
@@ -38,17 +41,6 @@ class CommandServiceProvider implements ServiceProviderInterface
      */
     public function boot(Application $app)
     {
-        if (php_sapi_name() === 'cli') {
-            /** @var \Knp\Console\Application $console */
-            $console = $app['console'];
-            $console->addCommands([
-                new ListCommand()
-            ]);
-            if (array_key_exists('commands', $app['config'])) {
-                foreach ($app['config']['commands'] as $command) {
-                    $console->add(new $command());
-                }
-            }
-        }
+        // nope.
     }
 }
