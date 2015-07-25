@@ -29,7 +29,7 @@ class ListCommand extends BaseCommand
         $app = $this->getSilexApplication();
         $entity = $input->getArgument('entity');
         /** @var EntityManagerInterface $em */
-        $em = $app['em'];
+        $em = $app['orm.em'];
         $qb = $em->createQueryBuilder()->from($entity, 'main');
         if ($input->hasOption('limit')) {
             $qb->setMaxResults($input->getOption('limit'));

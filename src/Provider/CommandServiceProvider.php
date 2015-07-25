@@ -3,6 +3,7 @@ namespace B2k\Apitude\Provider;
 
 
 use B2k\Apitude\Commands\Entities\ListCommand;
+use B2k\Apitude\Commands\Entities\TypesCommand;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -26,6 +27,7 @@ class CommandServiceProvider implements ServiceProviderInterface
                 'console.project_directory' => APP_PATH,
             ]);
             $app['base_commands'] = [
+                TypesCommand::class,
                 ListCommand::class,
             ];
         }
