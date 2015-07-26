@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\Annotations\API;
+namespace B2k\Apitude\Annotations\API\Entity;
 
 use Doctrine\Common\Annotations\Annotation;
 
@@ -7,9 +7,9 @@ use Doctrine\Common\Annotations\Annotation;
  * Class Exposure
  * @package B2k\Apitude\Annotations\API
  * @Annotation
- * @Annotation\Target({"PROPERTY"})
+ * @Annotation\Target({"CLASS"})
  */
-final class PropertyExposure extends Annotation
+final class Expose extends Annotation
 {
     public $exposure = true;
 
