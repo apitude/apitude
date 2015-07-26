@@ -5,6 +5,7 @@ namespace B2k\Apitude\Provider;
 use B2k\Apitude\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\EventManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Silex\Application;
@@ -34,6 +35,7 @@ class DoctrineServiceProvider implements ServiceProviderInterface
             'db.migrations.path' =>$app['config']['migrations.directory'],
         ]);
         $app['orm.em'] = $app->share($app->extend('orm.em', function(EntityManagerInterface $em) {
+            AnnotationRegistry::registerFile(APP_PATH.'/vendor/baohx2000/apitude/src/Annotations/APIAnnotations.php');
             $em->getConfiguration()->addCustomHydrationMode('simple', SimpleHydrator::class);
             return $em;
         }));

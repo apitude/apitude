@@ -3,7 +3,6 @@ namespace B2k\Apitude;
 
 use B2k\Apitude\Provider\CommandServiceProvider;
 use B2k\Apitude\Provider\DoctrineServiceProvider;
-use Knp\Provider\ConsoleServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 
 class Bootstrap
