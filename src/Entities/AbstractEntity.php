@@ -3,7 +3,13 @@ namespace B2k\Apitude\Entities;
 
 
 use Doctrine\ORM\Proxy\Proxy;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class AbstractEntity
+ * @package B2k\Apitude\Entities
+ * @ORM\MappedSuperclass
+ */
 abstract class AbstractEntity
 {
     /**
