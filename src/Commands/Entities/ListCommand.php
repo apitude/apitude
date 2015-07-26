@@ -6,7 +6,6 @@ use B2k\Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -17,13 +16,13 @@ class ListCommand extends BaseCommand
     public function configure()
     {
         $this->setName('entity:list');
-        parent::configure();
 
         $this->addArgument('entity', InputArgument::REQUIRED, 'Entity to list');
         $this->addOption('columns', 'c', InputOption::VALUE_IS_ARRAY|InputOption::VALUE_REQUIRED, 'Columns to show');
         $this->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'Limit (default all)');
         $this->addOption('start', 's', InputOption::VALUE_REQUIRED, 'Record to start at');
-        $this->addOption('filter', 'f', InputOption::VALUE_REQUIRED, 'DQL filter');
+        $this->addOption('filter', 'f', InputOption::VALUE_REQUIRED, 'DQL filter (entity is aliased as "main")');
+        parent::configure();
     }
 
     public function execute(InputInterface $input, OutputInterface $output)

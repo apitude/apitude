@@ -24,29 +24,31 @@ class BaseCommand extends Command
     public function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
-        if ($input->hasOption('T')) {
+        if ($input->hasOption('time') && $input->getOption('time')) {
             $this->startTime = microtime(true);
         }
 
-        if ($input->hasOption('M')) {
+        if ($input->hasOption('memory') && $input->getOption('memory')) {
             $this->baseMemory = memory_get_peak_usage(true);
         }
     }
 
     public function run(InputInterface $input, OutputInterface $output)
     {
-        parent::run($input, $output);
+        $result = parent::run($input, $output);
 
-        if ($input->hasOption('T')) {
+        if ($input->hasOption('time') && $input->getOption('time')) {
             $totalTime = microtime(true) - $this->startTime;
             $output->writeln('Command completed in <info>'.$totalTime.'</info> seconds');
         }
 
-        if ($input->hasOption('M')) {
+        if ($input->hasOption('memory') && $input->getOption('memory')) {
             $mem = memory_get_peak_usage(true);
             $output->writeln('Base memory usage at start of command: <info>'.$this->baseMemory.'</info>');
             $output->writeln('Peak memory usage: <info>'.$mem.'</info>');
             $output->writeln('Memory difference: <info>'.($mem - $this->baseMemory).'</info>');
         }
+
+        return $result;
     }
 }
