@@ -4,6 +4,8 @@ namespace B2k\Apitude\Commands\Entities;
 
 use B2k\Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +20,7 @@ class ListCommand extends BaseCommand
         parent::configure();
 
         $this->addArgument('entity', InputArgument::REQUIRED, 'Entity to list');
-//        $this->addOption('columns', 'c', InputOption::VALUE_IS_ARRAY, 'Columns to show');
+        $this->addOption('columns', 'c', InputOption::VALUE_IS_ARRAY|InputOption::VALUE_REQUIRED, 'Columns to show');
         $this->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'Limit (default all)');
         $this->addOption('start', 's', InputOption::VALUE_REQUIRED, 'Record to start at');
         $this->addOption('filter', 'f', InputOption::VALUE_REQUIRED, 'DQL filter');
@@ -31,6 +33,11 @@ class ListCommand extends BaseCommand
         /** @var EntityManagerInterface $em */
         $em = $app['orm.em'];
         $qb = $em->createQueryBuilder()->from($entity, 'main');
+        if ($input->getOption('columns')) {
+            $qb->select($input->getOption('columns'));
+        } else {
+            $qb->select('main');
+        }
         if ($input->getOption('limit')) {
             $qb->setMaxResults($input->getOption('limit'));
             if ($input->getOption('start') !== null) {
@@ -40,16 +47,18 @@ class ListCommand extends BaseCommand
         if ($input->getOption('filter')) {
             $qb->where($input->getOption('filter'));
         }
-        $results = $qb->getQuery()->getArrayResult();
+
+        $query = $qb->getQuery();
+        $results = $query->getResult('simple');
+
         if (empty($results)) {
             $output->writeln('<info>No Results</info>');
             return;
         }
 
-        /** @var TableHelper $table */
-        $table = $this->getHelper('table');
+        $table = new Table($output);
         $table->setHeaders(array_keys($results[0]));
         $table->addRows($results);
-        $table->render($output);
+        $table->render();
     }
 }
