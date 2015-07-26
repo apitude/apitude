@@ -2,9 +2,11 @@
 namespace B2k\Apitude\Provider;
 
 
+use B2k\Apitude\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -31,6 +33,10 @@ class DoctrineServiceProvider implements ServiceProviderInterface
         $app->register(new MigrationServiceProvider(), [
             'db.migrations.path' =>$app['config']['migrations.directory'],
         ]);
+        $app['orm.em'] = $app->share($app->extend('orm.em', function(EntityManagerInterface $em) {
+            $em->getConfiguration()->addCustomHydrationMode('simple', SimpleHydrator::class);
+            return $em;
+        }));
     }
 
     /**
