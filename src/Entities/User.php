@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-abstract class User
+abstract class User extends AbstractEntity
 {
     /**
      * @var int
