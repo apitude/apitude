@@ -15,7 +15,8 @@ class ListCommand extends BaseCommand
 {
     public function configure()
     {
-        $this->setName('entity:list');
+        $this->setName('entity:list')
+            ->setDescription('Lists specified entity using scalar values in tables');
 
         $this->addArgument('entity', InputArgument::REQUIRED, 'Entity to list');
         $this->addOption('columns', 'c', InputOption::VALUE_IS_ARRAY|InputOption::VALUE_REQUIRED, 'Columns to show');

@@ -26,10 +26,12 @@ class CommandServiceProvider implements ServiceProviderInterface
                 'console.version' => '1.0.0',
                 'console.project_directory' => APP_PATH,
             ]);
-            $app['base_commands'] = [
-                TypesCommand::class,
-                ListCommand::class,
-            ];
+            $app['base_commands'] = $app->share(function() {
+                return [
+                    TypesCommand::class,
+                    ListCommand::class,
+                ];
+            });
         }
     }
 

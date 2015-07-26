@@ -14,6 +14,7 @@ class GetCommand extends BaseCommand
     public function configure()
     {
         $this->setName('api:get')
+            ->setDescription('Return a sample API response of a specified Entity')
             ->addArgument('class', InputArgument::REQUIRED, 'Entity class')
             ->addArgument('id', InputArgument::REQUIRED, 'Entity ID');
     }
@@ -31,7 +32,10 @@ class GetCommand extends BaseCommand
         if (!$entity) {
             $output->writeln('Not found');
         } else {
+            /** @var EntityWriter $writer */
             $writer = $app[EntityWriter::class];
+            $data = $writer->getArrayForEntity($entity);
+            $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
         }
     }
 }

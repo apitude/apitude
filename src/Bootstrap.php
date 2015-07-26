@@ -1,6 +1,7 @@
 <?php
 namespace B2k\Apitude;
 
+use B2k\Apitude\Provider\APIServiceProvider;
 use B2k\Apitude\Provider\CommandServiceProvider;
 use B2k\Apitude\Provider\DoctrineServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
@@ -33,6 +34,7 @@ class Bootstrap
         $app->register(new UrlGeneratorServiceProvider);
         $app->register(new DoctrineServiceProvider);
         $app->register(new CommandServiceProvider);
+        $app->register(new APIServiceProvider);
 
         return $app;
     }
