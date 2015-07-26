@@ -17,6 +17,11 @@ class Application extends \Silex\Application
      */
     protected $shutdownServices = [];
 
+    /**
+     * @var array
+     */
+    protected $initializers = [];
+
     public function __construct($config, $values = [])
     {
         if (empty($values)) {
@@ -38,6 +43,10 @@ class Application extends \Silex\Application
         $this[self::CONFIG_KEY] = $config;
         $this['cache_dir'] = APP_PATH . '/tmp';
 
+        $this->addInitializer(ContainerAwareInterface::class, function(ContainerAwareInterface $service, $app) {
+            $service->setContainer($app);
+        });
+
         if (array_key_exists('service_providers', $config)) {
             $this->registerServiceProviders($config['service_providers']);
         }
@@ -45,6 +54,50 @@ class Application extends \Silex\Application
         if (array_key_exists('configuration.services', $config)) {
             $this->addConfiguredServices($config['configuration.services']);
         }
+    }
+
+    /**
+     * Override Pimple's offsetGet to add support for initializers
+     *
+     * @param  string $id The unique identifier for the parameter or object
+     * @return mixed      The value of the parameter or an object
+     */
+    public function offsetGet($id)
+    {
+        $value = parent::offsetGet($id);
+        if (is_object($value)) {
+            $this->initialize($value);
+        }
+        return $value;
+    }
+
+    /**
+     * Initialize an object
+     *
+     * @param  mixed $object Object to be initialized
+     * @return mixed
+     */
+    public function initialize($object)
+    {
+        foreach ($this->initializers as $interface => $initializer) {
+            if ($object instanceof $interface) {
+                $initializer($object, $this);
+            }
+        }
+        return $object;
+    }
+
+    /**
+     * Add an initializer
+     *
+     * @param  string   $interface Interface to trigger initialization
+     * @param  callable $callable  function(service, application)
+     * @return self
+     */
+    public function addInitializer($interface, callable $callable)
+    {
+        $this->initializers[$interface] = $callable;
+        return $this;
     }
 
     private function registerServiceProviders(array $providers)
@@ -80,9 +133,6 @@ class Application extends \Silex\Application
             $instance = call_user_func($service, $this);
         } else {
             $instance = new $service();
-        }
-        if ($instance instanceof ContainerAwareInterface) {
-            $instance->setContainer($this);
         }
         if ($instance instanceof ShutdownInterface) {
             $this->shutdownServices [] = $instance;

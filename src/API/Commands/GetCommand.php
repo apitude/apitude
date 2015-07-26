@@ -17,12 +17,14 @@ class GetCommand extends BaseCommand
             ->setDescription('Return a sample API response of a specified Entity')
             ->addArgument('class', InputArgument::REQUIRED, 'Entity class')
             ->addArgument('id', InputArgument::REQUIRED, 'Entity ID');
+
+        parent::configure();
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getSilexApplication();
-        $entity = $input->getArgument('entity');
+        $entity = $input->getArgument('class');
         $id = $input->getArgument('id');
 
         /** @var EntityManagerInterface $em */
