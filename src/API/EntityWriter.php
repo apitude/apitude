@@ -1,12 +1,12 @@
 <?php
-namespace B2k\Apitude\API;
+namespace Apitude\API;
 
 
-use B2k\Apitude\Entities\AbstractEntity;
-use B2k\Apitude\Provider\ContainerAwareInterface;
-use B2k\Apitude\Provider\ContainerAwareTrait;
-use B2k\Apitude\Provider\Helper\EntityManagerAwareInterface;
-use B2k\Apitude\Provider\Helper\EntityManagerAwareTrait;
+use Apitude\Entities\AbstractEntity;
+use Apitude\Provider\ContainerAwareInterface;
+use Apitude\Provider\ContainerAwareTrait;
+use Apitude\Provider\Helper\EntityManagerAwareInterface;
+use Apitude\Provider\Helper\EntityManagerAwareTrait;
 
 class EntityWriter implements ContainerAwareInterface, EntityManagerAwareInterface
 {

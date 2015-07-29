@@ -1,9 +1,9 @@
 <?php
-namespace B2k\Apitude\Provider;
+namespace Apitude\Provider;
 
 
-use B2k\Apitude\API\Commands\GetCommand;
-use B2k\Apitude\API\EntityWriter;
+use Apitude\API\Commands\GetCommand;
+use Apitude\API\EntityWriter;
 use Silex\Application;
 
 class APIServiceProvider extends AbstractServiceProvider

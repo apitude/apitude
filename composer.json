@@ -1,5 +1,5 @@
 {
-  "name": "baohx2000/apitude",
+  "name": "apitude/apitude",
   "description": "Yet another API framework",
   "type": "library",
   "license": "MIT",
@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "B2k\\Apitude\\": "src/"
+      "Apitude\\": "src/"
     }
   }
 }

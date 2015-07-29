@@ -1,9 +1,9 @@
 <?php
-namespace B2k\Apitude;
+namespace Apitude;
 
-use B2k\Apitude\Provider\APIServiceProvider;
-use B2k\Apitude\Provider\CommandServiceProvider;
-use B2k\Apitude\Provider\DoctrineServiceProvider;
+use Apitude\Provider\APIServiceProvider;
+use Apitude\Provider\CommandServiceProvider;
+use Apitude\Provider\DoctrineServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 
 class Bootstrap

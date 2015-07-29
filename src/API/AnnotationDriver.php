@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\API;
+namespace Apitude\API;
 
 
 use Metadata\Driver\DriverInterface;

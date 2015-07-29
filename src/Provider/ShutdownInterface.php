@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\Provider;
+namespace Apitude\Provider;
 
 interface ShutdownInterface
 {

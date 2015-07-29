@@ -1,8 +1,8 @@
 <?php
-namespace B2k\Apitude\Provider;
+namespace Apitude\Provider;
 
 
-use B2k\Apitude\ORM\SimpleHydrator;
+use Apitude\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Doctrine\Common\Annotations\AnnotationRegistry;

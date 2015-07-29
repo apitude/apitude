@@ -1,7 +1,7 @@
 <?php
-namespace B2k\Apitude\Commands\Entities;
+namespace Apitude\Commands\Entities;
 
-use B2k\Apitude\Commands\BaseCommand;
+use Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\Console\Input\InputInterface;

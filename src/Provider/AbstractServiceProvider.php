@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\Provider;
+namespace Apitude\Provider;
 
 
 use Silex\Application;
@@ -7,7 +7,7 @@ use Silex\ServiceProviderInterface;
 
 /**
  * Class AbstractServiceProvider
- * @package B2k\Apitude\Provider
+ * @package Apitude\Provider
  */
 abstract class AbstractServiceProvider implements ServiceProviderInterface
 {

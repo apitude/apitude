@@ -1,13 +1,13 @@
 <?php
-namespace B2k\Apitude\API;
+namespace Apitude\API;
 
 
-use B2k\Apitude\Provider\ContainerAwareInterface;
-use B2k\Apitude\Provider\ContainerAwareTrait;
-use B2k\Apitude\Provider\Helper\CacheAwareInterface;
-use B2k\Apitude\Provider\Helper\CacheAwareTrait;
-use B2k\Apitude\Provider\Helper\EntityManagerAwareInterface;
-use B2k\Apitude\Provider\Helper\EntityManagerAwareTrait;
+use Apitude\Provider\ContainerAwareInterface;
+use Apitude\Provider\ContainerAwareTrait;
+use Apitude\Provider\Helper\CacheAwareInterface;
+use Apitude\Provider\Helper\CacheAwareTrait;
+use Apitude\Provider\Helper\EntityManagerAwareInterface;
+use Apitude\Provider\Helper\EntityManagerAwareTrait;
 use Metadata\ClassHierarchyMetadata;
 use Metadata\MergeableClassMetadata;
 use Metadata\MetadataFactoryInterface;

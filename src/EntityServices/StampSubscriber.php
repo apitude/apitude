@@ -1,8 +1,8 @@
 <?php
-namespace B2k\Apitude\EntityServices;
+namespace Apitude\EntityServices;
 
 
-use B2k\Apitude\EntityStubs\StampEntityInterface;
+use Apitude\EntityStubs\StampEntityInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;

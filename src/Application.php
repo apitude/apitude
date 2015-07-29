@@ -1,8 +1,8 @@
 <?php
-namespace B2k\Apitude;
+namespace Apitude;
 
-use B2k\Apitude\Provider\ContainerAwareInterface;
-use B2k\Apitude\Provider\ShutdownInterface;
+use Apitude\Provider\ContainerAwareInterface;
+use Apitude\Provider\ShutdownInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends \Silex\Application

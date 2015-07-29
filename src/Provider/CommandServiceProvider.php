@@ -1,9 +1,9 @@
 <?php
-namespace B2k\Apitude\Provider;
+namespace Apitude\Provider;
 
 
-use B2k\Apitude\Commands\Entities\ListCommand;
-use B2k\Apitude\Commands\Entities\TypesCommand;
+use Apitude\Commands\Entities\ListCommand;
+use Apitude\Commands\Entities\TypesCommand;
 use Knp\Provider\ConsoleServiceProvider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;

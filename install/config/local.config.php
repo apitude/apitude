@@ -1,5 +1,5 @@
 <?php
-use B2k\Apitude\EntityServices\StampSubscriber;
+use Apitude\EntityServices\StampSubscriber;
 
 return [
     // Add any extra configuration services to be registered here
@@ -22,7 +22,7 @@ return [
             'mappings' => [
                 [
                     'type' => 'annotation',
-                    'namespace' => 'B2k\Apitude\Entities',
+                    'namespace' => 'Apitude\Entities',
                     'path' => APP_PATH.'/vendor/baohx2000/apitude/src/Entities',
                     'use_simple_annotation_reader' => false,
                 ],

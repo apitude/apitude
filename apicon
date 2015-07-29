@@ -6,6 +6,6 @@ if (! getenv('APP_PATH')) {
 /*
  * @codingStandardsIgnoreFile
  */
-/** @var \B2k\Apitude\Application $app */
+/** @var \Apitude\Application $app */
 $app = require_once getenv('APP_PATH').'/bootstrap.php';
 $app->runConsole();

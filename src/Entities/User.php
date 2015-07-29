@@ -1,11 +1,11 @@
 <?php
-namespace B2k\Apitude\Entities;
+namespace Apitude\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class User
- * @package B2k\Apitude\Entities
+ * @package Apitude\Entities
  * @ORM\Entity
  * @ORM\Table(name="users")
  */

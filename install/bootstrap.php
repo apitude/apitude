@@ -12,7 +12,7 @@ if (!defined('APP_PATH')) {
     define('APP_PATH', realpath(__DIR__));
 }
 
-$bs = new \B2k\Apitude\Bootstrap();
+$bs = new \Apitude\Bootstrap();
 $app = $bs->createApplication();
 
 // add extra service providers here

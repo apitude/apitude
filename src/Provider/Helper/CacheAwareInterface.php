@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\Provider\Helper;
+namespace Apitude\Provider\Helper;
 
 
 use Doctrine\Common\Cache\Cache;

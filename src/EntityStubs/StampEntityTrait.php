@@ -1,7 +1,7 @@
 <?php
-namespace B2k\Apitude\EntityStubs;
+namespace Apitude\EntityStubs;
 
-use B2k\Apitude\Entities\User;
+use Apitude\Entities\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,14 +25,14 @@ trait StampEntityTrait
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="B2k\Apitude\Entities\User")
+     * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
      * @ORM\JoinColumn(name="create_user_id", referencedColumnName="id")
      */
     private $createdBy;
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="B2k\Apitude\Entities\User")
+     * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
      * @ORM\JoinColumn(name="modify_user_id", referencedColumnName="id")
      */
     private $modifiedBy;

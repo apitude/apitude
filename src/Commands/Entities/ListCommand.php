@@ -1,8 +1,8 @@
 <?php
-namespace B2k\Apitude\Commands\Entities;
+namespace Apitude\Commands\Entities;
 
 
-use B2k\Apitude\Commands\BaseCommand;
+use Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Symfony\Component\Console\Helper\Table;

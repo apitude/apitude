@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\Commands;
+namespace Apitude\Commands;
 
 
 use Knp\Command\Command;

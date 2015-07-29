@@ -1,9 +1,9 @@
 <?php
-namespace B2k\Apitude\API\Commands;
+namespace Apitude\API\Commands;
 
 
-use B2k\Apitude\API\EntityWriter;
-use B2k\Apitude\Commands\BaseCommand;
+use Apitude\API\EntityWriter;
+use Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

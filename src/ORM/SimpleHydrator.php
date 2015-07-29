@@ -1,5 +1,5 @@
 <?php
-namespace B2k\Apitude\ORM;
+namespace Apitude\ORM;
 
 
 use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
