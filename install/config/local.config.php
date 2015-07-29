@@ -23,7 +23,7 @@ return [
                 [
                     'type' => 'annotation',
                     'namespace' => 'Apitude\Entities',
-                    'path' => APP_PATH.'/vendor/baohx2000/apitude/src/Entities',
+                    'path' => APP_PATH.'/vendor/apitude/apitude/src/Entities',
                     'use_simple_annotation_reader' => false,
                 ],
                 [

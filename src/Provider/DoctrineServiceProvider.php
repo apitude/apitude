@@ -35,7 +35,7 @@ class DoctrineServiceProvider implements ServiceProviderInterface
             'db.migrations.path' =>$app['config']['migrations.directory'],
         ]);
         $app['orm.em'] = $app->share($app->extend('orm.em', function(EntityManagerInterface $em) {
-            AnnotationRegistry::registerFile(APP_PATH.'/vendor/baohx2000/apitude/src/Annotations/APIAnnotations.php');
+            AnnotationRegistry::registerFile(APP_PATH.'/vendor/apitude/apitude/src/Annotations/APIAnnotations.php');
             $em->getConfiguration()->addCustomHydrationMode('simple', SimpleHydrator::class);
             return $em;
         }));
