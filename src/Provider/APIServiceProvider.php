@@ -6,6 +6,7 @@ use Apitude\API\AnnotationDriver;
 use Apitude\API\Commands\GetCommand;
 use Apitude\API\EntityWriter;
 use Apitude\API\MetadataFactory;
+use Apitude\API\Writer\ArrayWriter;
 use Apitude\API\Writer\PropertyWriter;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Silex\Application;
@@ -15,6 +16,7 @@ class APIServiceProvider extends AbstractServiceProvider
     protected $services = [
         EntityWriter::class,
         PropertyWriter::class,
+        ArrayWriter::class,
     ];
 
     protected $commands = [
