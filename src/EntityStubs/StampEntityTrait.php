@@ -41,6 +41,7 @@ trait StampEntityTrait
      * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
      * @ORM\JoinColumn(name="create_user_id", referencedColumnName="id")
      * @API\Property\Expose()
+     * @API\Property\GetterMethod()
      */
     private $createdBy;
 
@@ -49,6 +50,7 @@ trait StampEntityTrait
      * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
      * @ORM\JoinColumn(name="modify_user_id", referencedColumnName="id")
      * @API\Property\Expose()
+     * @API\Property\GetterMethod()
      */
     private $modifiedBy;
 

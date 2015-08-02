@@ -40,6 +40,7 @@ class Person extends AbstractEntity implements StampEntityInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=64)
+     * @API\Property\Expose()
      * @API\Property\GetterMethod
      */
     private $lastName;

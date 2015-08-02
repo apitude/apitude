@@ -36,7 +36,7 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
 
         $data['@type'] = $meta->getExposedName();
         /** @var PropertyMetadata $propMeta */
-        foreach ($meta->propertyMetadata as $propMeta) {
+        foreach ($meta->getPropertyMetadata() as $propMeta) {
             if (!$propMeta->isExposed()) {
                 continue;
             }
@@ -54,7 +54,11 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
                 $value = $service->{$method}($value);
             }
 
-            $data[$propMeta->getName()] = $value;
+            if (is_object($value)) {
+                $value = $this->writeObject($value);
+            }
+
+            $data[$propMeta->getExposedName()] = $value;
         }
 
         return $data;

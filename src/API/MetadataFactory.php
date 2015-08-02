@@ -4,7 +4,6 @@ namespace Apitude\API;
 
 use Metadata\AdvancedMetadataFactoryInterface;
 use Metadata\ClassHierarchyMetadata;
-use Metadata\ClassMetadata;
 use Metadata\Driver\AdvancedDriverInterface;
 use Metadata\Driver\DriverInterface;
 use Metadata\Cache\CacheInterface;
@@ -83,7 +82,11 @@ class MetadataFactory implements AdvancedMetadataFactoryInterface
         }
 
         $metadata = null;
+        /** @var \ReflectionClass $class */
         foreach ($this->getClassHierarchy($className) as $class) {
+            if ($class->isAbstract()) {
+                continue;
+            }
             if (isset($this->loadedClassMetadata[$name = $class->getName()])) {
                 if (null !== $classMetadata = $this->filterNullMetadata($this->loadedClassMetadata[$name])) {
                     $this->addClassMetadata($metadata, $classMetadata);
@@ -93,6 +96,7 @@ class MetadataFactory implements AdvancedMetadataFactoryInterface
 
             // check the cache
             if (null !== $this->cache) {
+                /** @var ClassMetadata $classMetadata */
                 if (($classMetadata = $this->cache->loadClassMetadataFromCache($class)) instanceof NullMetadata) {
                     $this->loadedClassMetadata[$name] = $classMetadata;
                     continue;

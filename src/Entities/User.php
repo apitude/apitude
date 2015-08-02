@@ -2,26 +2,32 @@
 namespace Apitude\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Apitude\Annotations\API;
 
 /**
  * Class User
  * @package Apitude\Entities
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @API\Entity\Expose()
  */
-abstract class User extends AbstractEntity
+class User extends AbstractEntity
 {
     /**
      * @var int
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @API\Property\Expose()
+     * @API\Property\GetterMethod()
      */
     private $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=64, nullable=false)
+     * @API\Property\Expose()
+     * @API\Property\GetterMethod()
      */
     private $username;
 
@@ -30,6 +36,14 @@ abstract class User extends AbstractEntity
      * @ORM\Column(type="string", length=128, nullable=true)
      */
     private $password;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set username

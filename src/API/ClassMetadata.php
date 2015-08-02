@@ -6,7 +6,7 @@ use Metadata\MergeableClassMetadata;
 
 class ClassMetadata extends MergeableClassMetadata
 {
-    private $exposed = false;
+    private $exposed;
 
     private $exposedName;
 

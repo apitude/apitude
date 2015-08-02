@@ -24,11 +24,14 @@ class Bootstrap
     }
 
     /**
+     * @param null|array $config
      * @return Application
      */
-    public function createApplication()
+    public function createApplication($config = null)
     {
-        $config = require(APP_PATH.'/config/local.config.php');
+        if (!$config) {
+            $config = require(APP_PATH.'/config/local.config.php');
+        }
 
         $app = new Application($config);
         $app->register(new UrlGeneratorServiceProvider);
