@@ -90,6 +90,11 @@ class AnnotationDriver implements DriverInterface
                             'get'.ucfirst($propMeta->getName())
                         );
                     }
+                } elseif (!$reflProperty->isPublic()) {
+                    // assuming standard getter
+                    $propMeta->setGetterMethod(
+                        'get'.ucfirst($propMeta->getName())
+                    );
                 }
             }
             $classMetadata->addPropertyMetadata($propMeta);
