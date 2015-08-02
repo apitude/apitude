@@ -40,13 +40,7 @@ class AnnotationDriver implements DriverInterface
             return $classMetadata;
         }
 
-        // does class have a name we should expose as?
-        // by default we will expose as the dotted class (Apitude.Entity.User)
-        $annotation = $this->reader->getClassAnnotation(
-            $class,
-            Entity\Name::class
-        );
-        if ($annotation) {
+        if ($annotation->name) {
             $classMetadata->setExposedName($annotation->name);
         }
 
@@ -54,6 +48,7 @@ class AnnotationDriver implements DriverInterface
             $propMeta = new PropertyMetadata($class->getName(), $reflProperty->getName());
 
             // is property exposed?
+            /** @var Property\Expose $annotation */
             $annotation = $this->reader->getPropertyAnnotation(
                 $reflProperty,
                 Property\Expose::class
@@ -61,6 +56,9 @@ class AnnotationDriver implements DriverInterface
             if ($annotation) {
                 $propMeta->setExposed(true);
 
+                if ($annotation->name) {
+                    $propMeta->setExposedName($annotation->name);
+                }
                 // set property renderer
                 /** @var Property\Renderer $annotation */
                 $annotation = $this->reader->getPropertyAnnotation(
@@ -93,8 +91,8 @@ class AnnotationDriver implements DriverInterface
                         );
                     }
                 }
-
             }
+            $classMetadata->addPropertyMetadata($propMeta);
         }
 
         return $classMetadata;

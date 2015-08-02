@@ -11,4 +11,5 @@ use Doctrine\Common\Annotations\Annotation;
  */
 final class Expose extends Annotation
 {
+    public $name;
 }

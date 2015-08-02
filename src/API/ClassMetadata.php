@@ -7,7 +7,24 @@ use Metadata\MergeableClassMetadata;
 class ClassMetadata extends MergeableClassMetadata
 {
     private $exposed = false;
+
     private $exposedName;
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPropertyMetadata()
+    {
+        return $this->propertyMetadata;
+    }
 
     public function setExposed($bool)
     {

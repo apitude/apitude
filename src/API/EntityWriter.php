@@ -8,10 +8,9 @@ use Apitude\Provider\ContainerAwareTrait;
 use Apitude\Provider\Helper\EntityManagerAwareInterface;
 use Apitude\Provider\Helper\EntityManagerAwareTrait;
 
-class EntityWriter implements ContainerAwareInterface, EntityManagerAwareInterface
+class EntityWriter implements ContainerAwareInterface, APIAw
 {
     use ContainerAwareTrait;
-    use EntityManagerAwareTrait;
 
     /**
      * @param AbstractEntity $entity

@@ -45,5 +45,31 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
         );
 
         $this->assertTrue($meta->isExposed());
+        $this->assertEquals('Someone', $meta->getExposedName());
+    }
+
+    public function testCanGetPropertyMetadata()
+    {
+        /** @var \Apitude\API\ClassMetadata $meta */
+        $meta = $this->driver->loadMetadataForClass(
+            new \ReflectionClass(\Entities\Person::class)
+        );
+
+        /** @var \Apitude\API\PropertyMetadata[] $props */
+        $props = $meta->getPropertyMetadata();
+
+        $this->assertArrayHasKey('id', $props);
+
+        $firstName = $props['firstName'];
+        $lastName  = $props['lastName'];
+        $created   = $props['created'];
+        $createdBy = $props['createdBy'];
+
+        $this->assertEquals('first', $firstName->getExposedName());
+        $this->assertEquals('lastName', $lastName->getExposedName());
+
+        $this->assertEquals(\Apitude\API\Writer\PropertyWriter::class, $created->getRenderService());
+        $this->assertEquals('renderISODateTime', $created->getRenderMethod());
+        $this->assertTrue($createdBy->isExposed());
     }
 }

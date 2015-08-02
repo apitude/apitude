@@ -11,10 +11,5 @@ use Doctrine\Common\Annotations\Annotation;
  */
 final class Expose extends Annotation
 {
-    public $exposure = true;
-
-    public function isExposed()
-    {
-        return $this->exposure;
-    }
+    public $name;
 }

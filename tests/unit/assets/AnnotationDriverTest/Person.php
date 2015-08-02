@@ -13,7 +13,7 @@ use Apitude\Annotations\API;
  * @package Apitest\Entities
  * @ORM\Entity
  * @ORM\Table(name="persons")
- * @API\Entity\Expose
+ * @API\Entity\Expose(name="Someone")
  */
 class Person extends AbstractEntity implements StampEntityInterface
 {
@@ -32,6 +32,7 @@ class Person extends AbstractEntity implements StampEntityInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=64)
+     * @API\Property\Expose(name="first")
      * @API\Property\GetterMethod
      */
     private $firstName;

@@ -20,7 +20,10 @@ class PropertyMetadata extends \Metadata\PropertyMetadata
      * @var string
      */
     private $getterMethod;
-
+    /**
+     * @var
+     */
+    private $exposedName;
 
     /**
      * @return string
@@ -88,5 +91,15 @@ class PropertyMetadata extends \Metadata\PropertyMetadata
     public function getRenderMethod()
     {
         return $this->renderMethod;
+    }
+
+    public function setExposedName($name)
+    {
+        $this->exposedName = $name;
+    }
+
+    public function getExposedName()
+    {
+        return $this->exposedName ?: $this->name;
     }
 }
