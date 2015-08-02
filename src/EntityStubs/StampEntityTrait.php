@@ -3,6 +3,7 @@ namespace Apitude\EntityStubs;
 
 use Apitude\Entities\User;
 use Doctrine\ORM\Mapping as ORM;
+use Apitude\Annotations\API;
 
 /**
  * Class StampEntityTrait
@@ -14,12 +15,24 @@ trait StampEntityTrait
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
+     * @API\Property\Expose
+     * @API\Property\GetterMethod
+     * @API\Property\Renderer(
+     *   renderService="Apitude\API\Writer\PropertyWriter",
+     *   renderMethod="renderISODateTime"
+     * )
      */
     private $created;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
+     * @API\Property\Expose
+     * @API\Property\GetterMethod
+     * @API\Property\Renderer(
+     *   renderService="Apitude\API\Writer\PropertyWriter",
+     *   renderMethod="renderISODateTime"
+     * )
      */
     private $modified;
 

@@ -86,6 +86,11 @@ class AnnotationDriver implements DriverInterface
                 if ($annotation) {
                     if ($annotation->method) {
                         $propMeta->setGetterMethod($annotation->method);
+                    } else {
+                        // standard getter
+                        $propMeta->setGetterMethod(
+                            'get'.ucfirst($propMeta->getName())
+                        );
                     }
                 }
 
