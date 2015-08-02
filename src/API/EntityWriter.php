@@ -5,12 +5,11 @@ namespace Apitude\API;
 use Apitude\Entities\AbstractEntity;
 use Apitude\Provider\ContainerAwareInterface;
 use Apitude\Provider\ContainerAwareTrait;
-use Apitude\Provider\Helper\EntityManagerAwareInterface;
-use Apitude\Provider\Helper\EntityManagerAwareTrait;
 
-class EntityWriter implements ContainerAwareInterface, APIAw
+class EntityWriter implements ContainerAwareInterface, APIServiceAwareInterface
 {
     use ContainerAwareTrait;
+    use APIServiceAwareTrait;
 
     /**
      * @param AbstractEntity $entity

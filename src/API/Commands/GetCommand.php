@@ -3,6 +3,7 @@ namespace Apitude\API\Commands;
 
 
 use Apitude\API\EntityWriter;
+use Apitude\API\Writer\ArrayWriter;
 use Apitude\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -34,9 +35,9 @@ class GetCommand extends BaseCommand
         if (!$entity) {
             $output->writeln('Not found');
         } else {
-            /** @var EntityWriter $writer */
-            $writer = $app[EntityWriter::class];
-            $data = $writer->getArrayForEntity($entity);
+            /** @var ArrayWriter $writer */
+            $writer = $app[ArrayWriter::class];
+            $data = $writer->writeObject($entity);
             $output->writeln(json_encode($data, JSON_PRETTY_PRINT));
         }
     }
