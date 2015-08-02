@@ -1,6 +1,7 @@
 <?php
 namespace Apitude\Annotations\API\Property;
 
+
 use Doctrine\Common\Annotations\Annotation;
 
 /**
@@ -9,6 +10,7 @@ use Doctrine\Common\Annotations\Annotation;
  * @Annotation
  * @Annotation\Target({"PROPERTY"})
  */
-final class Expose extends Annotation
+class GetterMethod extends Annotation
 {
+    public $method;
 }

@@ -16,6 +16,43 @@ class PropertyMetadata extends \Metadata\PropertyMetadata
      * @var string|null
      */
     private $renderService;
+    /**
+     * @var string
+     */
+    private $getterMethod;
+
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGetterMethod()
+    {
+        return $this->getterMethod;
+    }
+
+    /**
+     * @param string $getterMethod
+     */
+    public function setGetterMethod($getterMethod)
+    {
+        $this->getterMethod = $getterMethod;
+    }
 
     /**
      * @return string

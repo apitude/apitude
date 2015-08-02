@@ -76,6 +76,19 @@ class AnnotationDriver implements DriverInterface
                         }
                     }
                 }
+
+                // property getter?
+                /** @var Property\GetterMethod $annotation */
+                $annotation = $this->reader->getPropertyAnnotation(
+                    $reflProperty,
+                    Property\GetterMethod::class
+                );
+                if ($annotation) {
+                    if ($annotation->method) {
+                        $propMeta->setGetterMethod($annotation->method);
+                    }
+                }
+
             }
         }
 
