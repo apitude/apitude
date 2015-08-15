@@ -1,5 +1,5 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
 use Metadata\MergeableClassMetadata;

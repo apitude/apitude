@@ -1,12 +1,12 @@
 <?php
 namespace Entities;
 
-use Apitude\Entities\AbstractEntity;
-use Apitude\Entities\User;
-use Apitude\EntityStubs\StampEntityInterface;
-use Apitude\EntityStubs\StampEntityTrait;
+use Apitude\Core\Entities\AbstractEntity;
+use Apitude\Core\Entities\User;
+use Apitude\Core\EntityStubs\StampEntityInterface;
+use Apitude\Core\EntityStubs\StampEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
-use Apitude\Annotations\API;
+use Apitude\Core\Annotations\API;
 
 /**
  * Class Person
@@ -47,7 +47,7 @@ class Person extends AbstractEntity implements StampEntityInterface
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
+     * @ORM\OneToOne(targetEntity="Apitude\Core\Entities\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;

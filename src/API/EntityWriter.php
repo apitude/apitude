@@ -1,10 +1,10 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
-use Apitude\Entities\AbstractEntity;
-use Apitude\Provider\ContainerAwareInterface;
-use Apitude\Provider\ContainerAwareTrait;
+use Apitude\Core\Entities\AbstractEntity;
+use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\ContainerAwareTrait;
 
 class EntityWriter implements ContainerAwareInterface, APIServiceAwareInterface
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Apitude\Entities;
+namespace Apitude\Core\Entities;
 
 
 use Doctrine\ORM\Proxy\Proxy;
@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class AbstractEntity
- * @package Apitude\Entities
+ * @package Apitude\Core\Entities
  * @ORM\MappedSuperclass
  */
 abstract class AbstractEntity

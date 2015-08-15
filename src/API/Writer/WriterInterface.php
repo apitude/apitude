@@ -1,5 +1,5 @@
 <?php
-namespace Apitude\API\Writer;
+namespace Apitude\Core\API\Writer;
 
 
 interface WriterInterface

@@ -11,7 +11,7 @@ require_once realpath(__DIR__.'/../../vendor').'/autoload.php';
 // annotation classes
 require_once realpath(__DIR__.'/../../src/Annotations').'/APIAnnotations.php';
 
-$bs = new \Apitude\Bootstrap();
+$bs = new \Apitude\Core\Bootstrap();
 $app = $bs->createApplication();
 
 // add extra service providers here

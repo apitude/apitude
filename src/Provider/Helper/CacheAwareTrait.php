@@ -1,7 +1,7 @@
 <?php
-namespace Apitude\Provider\Helper;
+namespace Apitude\Core\Provider\Helper;
 
-use Apitude\Application;
+use Apitude\Core\Application;
 use Doctrine\Common\Cache\Cache;
 
 /**

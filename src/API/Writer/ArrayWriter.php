@@ -1,12 +1,12 @@
 <?php
-namespace Apitude\API\Writer;
+namespace Apitude\Core\API\Writer;
 
 
-use Apitude\API\ClassMetadata;
-use Apitude\API\MetadataFactory;
-use Apitude\API\PropertyMetadata;
-use Apitude\Provider\ContainerAwareInterface;
-use Apitude\Provider\ContainerAwareTrait;
+use Apitude\Core\API\ClassMetadata;
+use Apitude\Core\API\MetadataFactory;
+use Apitude\Core\API\PropertyMetadata;
+use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\ContainerAwareTrait;
 
 class ArrayWriter implements WriterInterface, ContainerAwareInterface
 {

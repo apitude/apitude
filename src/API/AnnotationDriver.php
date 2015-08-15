@@ -1,9 +1,9 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
-use Apitude\Annotations\API\Entity;
-use Apitude\Annotations\API\Property;
+use Apitude\Core\Annotations\API\Entity;
+use Apitude\Core\Annotations\API\Property;
 use Doctrine\Common\Annotations\Reader;// interface
 use Metadata\Driver\DriverInterface;
 

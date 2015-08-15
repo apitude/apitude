@@ -1,8 +1,8 @@
 <?php
-namespace Apitude;
+namespace Apitude\Core;
 
-use Apitude\Provider\ContainerAwareInterface;
-use Apitude\Provider\ShutdownInterface;
+use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\ShutdownInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends \Silex\Application

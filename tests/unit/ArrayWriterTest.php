@@ -8,7 +8,7 @@ class ArrayWriterTest extends \Codeception\TestCase\Test
      */
     protected $tester;
     /**
-     * @var \Apitude\API\Writer\ArrayWriter
+     * @var \Apitude\Core\API\Writer\ArrayWriter
      */
     protected $writer;
     protected $app;
@@ -20,7 +20,7 @@ class ArrayWriterTest extends \Codeception\TestCase\Test
         }
         require_once (__DIR__.'/assets/AnnotationDriverTest/Person.php');
         require_once (__DIR__.'/assets/ArrayWriterTest/User.php');
-        $this->writer = new \Apitude\API\Writer\ArrayWriter();
+        $this->writer = new \Apitude\Core\API\Writer\ArrayWriter();
         $this->writer->setContainer($this->app);
     }
 

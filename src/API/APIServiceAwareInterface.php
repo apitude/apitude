@@ -1,8 +1,8 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
-use Apitude\API\Writer\PropertyWriter;
+use Apitude\Core\API\Writer\PropertyWriter;
 
 interface APIServiceAwareInterface
 {

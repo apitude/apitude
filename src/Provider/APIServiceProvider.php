@@ -1,13 +1,13 @@
 <?php
-namespace Apitude\Provider;
+namespace Apitude\Core\Provider;
 
 
-use Apitude\API\AnnotationDriver;
-use Apitude\API\Commands\GetCommand;
-use Apitude\API\EntityWriter;
-use Apitude\API\MetadataFactory;
-use Apitude\API\Writer\ArrayWriter;
-use Apitude\API\Writer\PropertyWriter;
+use Apitude\Core\API\AnnotationDriver;
+use Apitude\Core\API\Commands\GetCommand;
+use Apitude\Core\API\EntityWriter;
+use Apitude\Core\API\MetadataFactory;
+use Apitude\Core\API\Writer\ArrayWriter;
+use Apitude\Core\API\Writer\PropertyWriter;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Silex\Application;
 

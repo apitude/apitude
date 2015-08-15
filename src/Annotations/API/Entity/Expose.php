@@ -1,11 +1,11 @@
 <?php
-namespace Apitude\Annotations\API\Entity;
+namespace Apitude\Core\Annotations\API\Entity;
 
 use Doctrine\Common\Annotations\Annotation;
 
 /**
  * Class Exposure
- * @package Apitude\Annotations\API
+ * @package Apitude\Core\Annotations\API
  * @Annotation
  * @Annotation\Target({"CLASS"})
  */

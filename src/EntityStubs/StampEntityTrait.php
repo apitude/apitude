@@ -1,9 +1,9 @@
 <?php
-namespace Apitude\EntityStubs;
+namespace Apitude\Core\EntityStubs;
 
-use Apitude\Entities\User;
+use Apitude\Core\Entities\User;
 use Doctrine\ORM\Mapping as ORM;
-use Apitude\Annotations\API;
+use Apitude\Core\Annotations\API;
 
 /**
  * Class StampEntityTrait
@@ -18,7 +18,7 @@ trait StampEntityTrait
      * @API\Property\Expose
      * @API\Property\GetterMethod
      * @API\Property\Renderer(
-     *   renderService="Apitude\API\Writer\PropertyWriter",
+     *   renderService="Apitude\Core\API\Writer\PropertyWriter",
      *   renderMethod="renderISODateTime"
      * )
      */
@@ -30,7 +30,7 @@ trait StampEntityTrait
      * @API\Property\Expose
      * @API\Property\GetterMethod
      * @API\Property\Renderer(
-     *   renderService="Apitude\API\Writer\PropertyWriter",
+     *   renderService="Apitude\Core\API\Writer\PropertyWriter",
      *   renderMethod="renderISODateTime"
      * )
      */
@@ -38,7 +38,7 @@ trait StampEntityTrait
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
+     * @ORM\OneToOne(targetEntity="Apitude\Core\Entities\User")
      * @ORM\JoinColumn(name="create_user_id", referencedColumnName="id")
      * @API\Property\Expose()
      * @API\Property\GetterMethod()
@@ -47,7 +47,7 @@ trait StampEntityTrait
 
     /**
      * @var User
-     * @ORM\OneToOne(targetEntity="Apitude\Entities\User")
+     * @ORM\OneToOne(targetEntity="Apitude\Core\Entities\User")
      * @ORM\JoinColumn(name="modify_user_id", referencedColumnName="id")
      * @API\Property\Expose()
      * @API\Property\GetterMethod()

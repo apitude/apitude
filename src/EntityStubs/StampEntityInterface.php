@@ -1,8 +1,8 @@
 <?php
-namespace Apitude\EntityStubs;
+namespace Apitude\Core\EntityStubs;
 
 
-use Apitude\Entities\User;
+use Apitude\Core\Entities\User;
 
 interface StampEntityInterface
 {

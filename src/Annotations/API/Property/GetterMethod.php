@@ -1,12 +1,12 @@
 <?php
-namespace Apitude\Annotations\API\Property;
+namespace Apitude\Core\Annotations\API\Property;
 
 
 use Doctrine\Common\Annotations\Annotation;
 
 /**
  * Class Exposure
- * @package Apitude\Annotations\API
+ * @package Apitude\Core\Annotations\API
  * @Annotation
  * @Annotation\Target({"PROPERTY"})
  */

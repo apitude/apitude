@@ -9,7 +9,7 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
     protected $tester;
 
     /**
-     * @var \Apitude\API\AnnotationDriver
+     * @var \Apitude\Core\API\AnnotationDriver
      */
     protected $driver;
 
@@ -25,7 +25,7 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
                 __DIR__.'/../../src/Annotations'
             ).'/APIAnnotations.php');
         require_once (__DIR__.'/assets/AnnotationDriverTest/Person.php');
-        $this->driver = new \Apitude\API\AnnotationDriver(
+        $this->driver = new \Apitude\Core\API\AnnotationDriver(
             new \Doctrine\Common\Annotations\AnnotationReader()
         );
     }
@@ -39,7 +39,7 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
     {
         $p = new \Entities\Person();
 
-        /** @var \Apitude\API\ClassMetadata $meta */
+        /** @var \Apitude\Core\API\ClassMetadata $meta */
         $meta = $this->driver->loadMetadataForClass(
             new \ReflectionClass(get_class($p))
         );
@@ -50,12 +50,12 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
 
     public function testCanGetPropertyMetadata()
     {
-        /** @var \Apitude\API\ClassMetadata $meta */
+        /** @var \Apitude\Core\API\ClassMetadata $meta */
         $meta = $this->driver->loadMetadataForClass(
             new \ReflectionClass(\Entities\Person::class)
         );
 
-        /** @var \Apitude\API\PropertyMetadata[] $props */
+        /** @var \Apitude\Core\API\PropertyMetadata[] $props */
         $props = $meta->getPropertyMetadata();
 
         $this->assertArrayHasKey('id', $props);
@@ -68,7 +68,7 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
         $this->assertEquals('first', $firstName->getExposedName());
         $this->assertEquals('lastName', $lastName->getExposedName());
 
-        $this->assertEquals(\Apitude\API\Writer\PropertyWriter::class, $created->getRenderService());
+        $this->assertEquals(\Apitude\Core\API\Writer\PropertyWriter::class, $created->getRenderService());
         $this->assertEquals('renderISODateTime', $created->getRenderMethod());
         $this->assertTrue($createdBy->isExposed());
     }

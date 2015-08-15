@@ -1,10 +1,10 @@
 <?php
 
-namespace Apitude\API\Writer;
+namespace Apitude\Core\API\Writer;
 
 
-use Apitude\Provider\ContainerAwareInterface;
-use Apitude\Provider\ContainerAwareTrait;
+use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\ContainerAwareTrait;
 
 class PropertyWriter implements ContainerAwareInterface
 {

@@ -1,12 +1,12 @@
 <?php
-namespace Apitude\Entities;
+namespace Apitude\Core\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Apitude\Annotations\API;
+use Apitude\Core\Annotations\API;
 
 /**
  * Class User
- * @package Apitude\Entities
+ * @package Apitude\Core\Entities
  * @ORM\Entity
  * @ORM\Table(name="users")
  * @API\Entity\Expose()

@@ -1,7 +1,7 @@
 <?php
-namespace Apitude\Provider;
+namespace Apitude\Core\Provider;
 
-use Apitude\Application;
+use Apitude\Core\Application;
 
 interface ContainerAwareInterface
 {

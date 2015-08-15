@@ -1,5 +1,5 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
 class PropertyMetadata extends \Metadata\PropertyMetadata

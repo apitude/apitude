@@ -1,10 +1,10 @@
 <?php
-namespace Apitude\API\Commands;
+namespace Apitude\Core\API\Commands;
 
 
-use Apitude\API\EntityWriter;
-use Apitude\API\Writer\ArrayWriter;
-use Apitude\Commands\BaseCommand;
+use Apitude\Core\API\EntityWriter;
+use Apitude\Core\API\Writer\ArrayWriter;
+use Apitude\Core\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

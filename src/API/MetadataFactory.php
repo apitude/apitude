@@ -1,5 +1,5 @@
 <?php
-namespace Apitude\API;
+namespace Apitude\Core\API;
 
 
 use Metadata\AdvancedMetadataFactoryInterface;
@@ -26,7 +26,7 @@ class MetadataFactory implements AdvancedMetadataFactoryInterface
      */
     private $loadedMetadata = [];
     /**
-     * @var \Apitude\API\ClassMetadata[]
+     * @var \Apitude\Core\API\ClassMetadata[]
      */
     private $loadedClassMetadata = [];
     /**
