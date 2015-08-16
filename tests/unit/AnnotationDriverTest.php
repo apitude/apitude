@@ -63,13 +63,11 @@ class AnnotationDriverTest extends \Codeception\TestCase\Test
         $firstName = $props['firstName'];
         $lastName  = $props['lastName'];
         $created   = $props['created'];
-        $createdBy = $props['createdBy'];
 
         $this->assertEquals('first', $firstName->getExposedName());
         $this->assertEquals('lastName', $lastName->getExposedName());
 
         $this->assertEquals(\Apitude\Core\API\Writer\PropertyWriter::class, $created->getRenderService());
         $this->assertEquals('renderISODateTime', $created->getRenderMethod());
-        $this->assertTrue($createdBy->isExposed());
     }
 }

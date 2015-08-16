@@ -47,11 +47,9 @@ class ArrayWriterTest extends \Codeception\TestCase\Test
 
         $this->assertInternalType('array', $result);
         $this->assertEquals('Someone', $result['@type']);
-        $this->assertInternalType('array', $result['createdBy']);
         $this->assertArrayHasKey('first', $result);
         $this->assertEquals('Bob', $result['first']);
         $this->assertEquals('2015-01-01T13:00:00+00:00', $result['created']);
         $this->assertEquals('2015-01-01T14:00:00+00:00', $result['modified']);
-        $this->assertEquals('Entities.User', $result['createdBy']['@type']);
     }
 }

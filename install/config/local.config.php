@@ -25,12 +25,6 @@ return [
                     'namespace' => 'Apitude\Core\Entities',
                     'path' => APP_PATH.'/vendor/apitude/apitude/src/Entities',
                     'use_simple_annotation_reader' => false,
-                ],
-                [
-                    'type' => 'annotation',
-                    'namespace' => 'YOURAPPLICATION\Entities',
-                    'path' => APP_PATH.'/src/Entities',
-                    'use_simple_annotation_reader' => false,
                 ]
             ]
         ]
