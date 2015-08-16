@@ -19,25 +19,10 @@ return [
     'orm.options' => [
         'orm.proxies_dir' => APP_PATH.'/tmp/proxies',
         'orm.em.options' => [
-            'mappings' => [
-                [
-                    'type' => 'annotation',
-                    'namespace' => 'Apitude\Core\Entities',
-                    'path' => APP_PATH.'/vendor/apitude/apitude/src/Entities',
-                    'use_simple_annotation_reader' => false,
-                ],
-                [
-                    'type' => 'annotation',
-                    'namespace' => 'YOURAPPLICATION\Entities',
-                    'path' => APP_PATH.'/src/Entities',
-                    'use_simple_annotation_reader' => false,
-                ]
-            ]
+            'mappings' => []
         ]
     ],
-    'orm.subscribers' => [
-        StampSubscriber::class,
-    ],
+    'orm.subscribers' => [],
     // Note that Migrations is NOT inside src.  This is because it does not and should not
     // contain any application logic, and therefore is separate from the application.
     'migrations.directory' => APP_PATH.'/Migrations',

@@ -30,17 +30,18 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
         }
 
         if (!empty($this->doctrineEventSubscribers)) {
-            $subscribers = &$app['config']['orm.subscribers'];
+            $config = $app['config'];
             foreach ($this->doctrineEventSubscribers as $class) {
-                $subscribers[] = $class;
+                $config['orm.subscribers'][] = $class;
             }
         }
 
         if (!empty($this->entityFolders)) {
-            $mappings =& $app['config']['orm.options']['orm.em.options']['mappings'];
-
+            if (!isset($config)) {
+                $config = $app['config'];
+            }
             foreach ($this->entityFolders as $namespace => $path) {
-                $mappings[] = [
+                $config['orm.options']['orm.em.options']['mappings'][] = [
                     'type' => 'annotation',
                     'namespace' => $namespace,
                     'path' => $path,
@@ -48,6 +49,11 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
                 ];
             }
         }
+
+        if (isset($config)) {
+            $app['config'] = $config;
+        }
+
         if (php_sapi_name() === 'cli' && !empty($this->commands)) {
             $app['base_commands'] = $app->extend('base_commands', function(array $commands) {
                 return array_merge($commands, $this->commands);

@@ -2,6 +2,7 @@
 namespace Apitude\Core\Provider;
 
 
+use Apitude\Core\EntityServices\StampSubscriber;
 use Apitude\Core\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
@@ -11,8 +12,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class DoctrineServiceProvider implements ServiceProviderInterface
+class DoctrineServiceProvider extends AbstractServiceProvider implements ServiceProviderInterface
 {
+    public function __construct()
+    {
+        $this->entityFolders['Apitude\Core\Entities'] = realpath(__DIR__.'/../Entities');
+        $this->doctrineEventSubscribers[] = StampSubscriber::class;
+    }
 
     /**
      * Registers services on the given app.
@@ -23,6 +29,8 @@ class DoctrineServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        parent::register($app);
+
         $app->register(
             new \Silex\Provider\DoctrineServiceProvider(),
             ['db.options' => $app['config']['db.options']]
