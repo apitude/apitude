@@ -19,7 +19,6 @@ class ArrayWriterTest extends \Codeception\TestCase\Test
             $this->app = require realpath(__DIR__.'/../_assets').'/bootstrap.php';
         }
         require_once (__DIR__.'/assets/AnnotationDriverTest/Person.php');
-        require_once (__DIR__.'/assets/ArrayWriterTest/User.php');
         $this->writer = new \Apitude\Core\API\Writer\ArrayWriter();
         $this->writer->setContainer($this->app);
     }
@@ -35,8 +34,7 @@ class ArrayWriterTest extends \Codeception\TestCase\Test
         $p->setFirstName('Bob')
             ->setLastName('McBob')
             ->setCreated(new \DateTime('2015-01-01T13:00:00Z'))
-            ->setModified(new \DateTime('2015-01-01T14:00:00Z'))
-            ->setCreatedBy((new \Entities\User())->setUsername('admin'));
+            ->setModified(new \DateTime('2015-01-01T14:00:00Z'));
 
         return $p;
     }

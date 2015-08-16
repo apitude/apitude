@@ -1,14 +1,12 @@
 <?php
 namespace Apitude\Core\EntityStubs;
 
-use Apitude\Core\Entities\User;
 use Doctrine\ORM\Mapping as ORM;
 use Apitude\Core\Annotations\API;
 
 /**
  * Class StampEntityTrait
  * @package EntityStubs
- * @ORM\Entity
  */
 trait StampEntityTrait
 {
@@ -35,60 +33,6 @@ trait StampEntityTrait
      * )
      */
     private $modified;
-
-    /**
-     * @var User
-     * @ORM\OneToOne(targetEntity="Apitude\Core\Entities\User")
-     * @ORM\JoinColumn(name="create_user_id", referencedColumnName="id")
-     * @API\Property\Expose()
-     * @API\Property\GetterMethod()
-     */
-    private $createdBy;
-
-    /**
-     * @var User
-     * @ORM\OneToOne(targetEntity="Apitude\Core\Entities\User")
-     * @ORM\JoinColumn(name="modify_user_id", referencedColumnName="id")
-     * @API\Property\Expose()
-     * @API\Property\GetterMethod()
-     */
-    private $modifiedBy;
-
-    /**
-     * @return User
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * @param User $createdBy
-     * @return StampEntityTrait
-     */
-    public function setCreatedBy(User $createdBy = null)
-    {
-        $this->createdBy = $createdBy;
-        return $this;
-    }
-
-    /**
-     * @return User
-     */
-    public function getModifiedBy()
-    {
-        return $this->modifiedBy;
-    }
-
-    /**
-     * @param User $modifiedBy
-     * @return StampEntityTrait
-     */
-    public function setModifiedBy(User $modifiedBy = null)
-    {
-        $this->modifiedBy = $modifiedBy;
-        return $this;
-    }
 
     /**
      * @return \DateTime
