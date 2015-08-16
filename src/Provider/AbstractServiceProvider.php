@@ -13,6 +13,7 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
 {
     protected $services = [];
     protected $commands = [];
+    protected $doctrineEventSubscribers = [];
 
     /**
      * Automatically registers all service classes in $this->services array
@@ -25,6 +26,13 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
             $app[$class] = $app->share(function() use ($class) {
                 return new $class();
             });
+        }
+
+        if (!empty($this->doctrineEventSubscribers)) {
+            $subscribers = &$app['config']['orm.subscribers'];
+            foreach ($this->doctrineEventSubscribers as $class) {
+                $subscribers[] = $class;
+            }
         }
 
         if (php_sapi_name() === 'cli' && !empty($this->commands)) {
