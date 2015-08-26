@@ -5,6 +5,8 @@ http://slides.com/gordonforsythe/deck#/
 SETUP
 =====
 
+[![Join the chat at https://gitter.im/apitude/apitude](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/apitude/apitude?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 1. Create a new composer application depending on baohx2000/apitude and run composer install
 1. Copy everything in `vendor/apitude/apitude/install` to your application root
   1. Set environment constants and other configuration in `config/local.config.php`
