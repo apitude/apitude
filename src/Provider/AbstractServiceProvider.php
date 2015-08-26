@@ -23,8 +23,11 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
-        foreach ($this->services as $class) {
-            $app[$class] = $app->share(function() use ($class) {
+        foreach ($this->services as $key => $class) {
+            if (is_numeric($key)) {
+                $key = $class;
+            }
+            $app[$key] = $app->share(function() use ($class) {
                 return new $class();
             });
         }
