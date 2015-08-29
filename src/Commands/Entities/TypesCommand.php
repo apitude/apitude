@@ -22,7 +22,8 @@ class TypesCommand extends BaseCommand
         /** @var ClassMetadata[] $types */
         $types = $em->getMetadataFactory()->getAllMetadata();
         foreach ($types as $meta) {
-            $output->writeln($meta->getName());
+            $name = str_replace('\\', '.', $meta->getName());
+            $output->writeln($name);
         }
     }
 }

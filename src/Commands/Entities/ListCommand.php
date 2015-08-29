@@ -29,7 +29,7 @@ class ListCommand extends BaseCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $app = $this->getSilexApplication();
-        $entity = $input->getArgument('entity');
+        $entity = str_replace('.', '\\', $input->getArgument('entity'));
         /** @var EntityManagerInterface $em */
         $em = $app['orm.em'];
         $qb = $em->createQueryBuilder()->from($entity, 'main');
