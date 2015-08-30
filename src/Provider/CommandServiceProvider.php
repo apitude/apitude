@@ -21,9 +21,15 @@ class CommandServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         if (php_sapi_name() === 'cli') {
-            $app['console.setup'] = [];
-            $app['console.prerun'] = [];
-            $app['console.postrun'] = [];
+            $app['console.setup'] = $app->share(function () {
+                return [];
+            });
+            $app['console.prerun'] = $app->share(function () {
+                return [];
+            });
+            $app['console.postrun'] = $app->share(function () {
+                return [];
+            });
 
             $app->register(new ConsoleServiceProvider, [
                 'console.name' => 'Apitude',
