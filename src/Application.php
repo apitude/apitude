@@ -162,6 +162,9 @@ class Application extends \Silex\Application
         foreach ($commands as $class)
         {
             $console->add(new $class);
+            foreach ($this['console.configure'] as $callback) {
+                $callback($this);
+            }
         }
     }
 

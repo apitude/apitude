@@ -16,9 +16,6 @@ class BaseCommand extends Command
     {
         parent::configure();
 
-        foreach ($this->getSilexApplication()['console.configure'] as $callback) {
-            $callback($this);
-        }
         $this->addOption('time', 'T', InputOption::VALUE_NONE, 'Time command');
         $this->addOption('memory', 'M', InputOption::VALUE_NONE, 'Show memory usage');
     }
