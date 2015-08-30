@@ -21,7 +21,7 @@ class CommandServiceProvider implements ServiceProviderInterface
     public function register(Application $app)
     {
         if (php_sapi_name() === 'cli') {
-            $app['console.setup'] = $app->share(function () {
+            $app['console.configure'] = $app->share(function () {
                 return [];
             });
             $app['console.prerun'] = $app->share(function () {
