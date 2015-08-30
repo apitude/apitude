@@ -16,7 +16,9 @@ class BaseCommand extends Command
     {
         parent::configure();
 
-        $this->addOption('user', 'U', InputOption::VALUE_REQUIRED, 'User ID to run command as');
+        foreach ($this->getSilexApplication()['console.configure'] as $callback) {
+            $callback($this);
+        }
         $this->addOption('time', 'T', InputOption::VALUE_NONE, 'Time command');
         $this->addOption('memory', 'M', InputOption::VALUE_NONE, 'Show memory usage');
     }
@@ -30,6 +32,10 @@ class BaseCommand extends Command
 
         if ($input->hasOption('memory') && $input->getOption('memory')) {
             $this->baseMemory = memory_get_peak_usage(true);
+        }
+
+        foreach ($this->getSilexApplication()['console.prerun'] as $callback) {
+            $callback($this, $input, $output);
         }
     }
 
@@ -47,6 +53,10 @@ class BaseCommand extends Command
             $output->writeln('Base memory usage at start of command: <info>'.$this->baseMemory.'</info>');
             $output->writeln('Peak memory usage: <info>'.$mem.'</info>');
             $output->writeln('Memory difference: <info>'.($mem - $this->baseMemory).'</info>');
+        }
+
+        foreach ($this->getSilexApplication()['console.postrun'] as $callback) {
+            $callback($this, $input, $output);
         }
 
         return $result;
