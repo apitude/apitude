@@ -161,9 +161,10 @@ class Application extends \Silex\Application
         $console = $this['console'];
         foreach ($commands as $class)
         {
-            $console->add(new $class);
+            $command = new $class;
+            $console->add($command);
             foreach ($this['console.configure'] as $callback) {
-                $callback($this);
+                $callback($command);
             }
         }
     }
