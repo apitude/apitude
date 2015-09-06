@@ -7,6 +7,7 @@ use Apitude\Core\API\MetadataFactory;
 use Apitude\Core\API\PropertyMetadata;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
+use Doctrine\Common\Collections\Collection;
 
 class ArrayWriter implements WriterInterface, ContainerAwareInterface
 {
@@ -64,8 +65,20 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
         return $data;
     }
 
-    public function writeCollection(CollectionInterface $collection)
+    /**
+     * @param Collection $collection
+     * @return array
+     */
+    public function writeCollection(Collection $collection)
     {
-        // TODO: Implement writeCollection() method.
+        $result = [
+            'count' => count($collection),
+            'data'  => [],
+        ];
+        foreach ($collection as $entity) {
+            $result['data'][] = $this->writeObject($entity);
+        }
+
+        return $result;
     }
 }
