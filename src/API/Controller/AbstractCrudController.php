@@ -7,6 +7,7 @@ use Apitude\Core\API\Writer\WriterInterface;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
 use Apitude\Core\Provider\Helper\EntityManagerAwareTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,7 +96,7 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         $entity = $this->getEntityPopulator()->updateFromArray($entity, $data);
         $this->getEntityManager()->flush();
 
-        return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_CREATED);
+        return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_OK);
     }
 
     public function delete(Request $request, $id)
@@ -111,5 +112,17 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         $this->getEntityManager()->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function readList()
+    {
+        $class = $this->getEntityClassFromType($this->apiRecordType);
+
+        $result = $this->getEntityManager()->getRepository($class)
+            ->findAll();
+
+        $collection = new ArrayCollection($result);
+
+        return new JsonResponse($this->apiWriter->writeCollection($collection), Response::HTTP_OK);
     }
 }
