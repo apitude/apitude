@@ -19,7 +19,7 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
     /**
      * Automatically registers all service classes in $this->services array
      * {@inheritdoc}
-     * @param Application $app
+     * @param Application|\Apitude\Core\Application $app
      */
     public function register(Application $app)
     {
@@ -27,8 +27,10 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
             if (is_numeric($key)) {
                 $key = $class;
             }
-            $app[$key] = $app->share(function() use ($class) {
-                return new $class();
+            $app[$key] = $app->share(function() use ($class, $app) {
+                $result = new $class();
+                $app->initialize($result);
+                return $result;
             });
         }
 

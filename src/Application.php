@@ -57,21 +57,6 @@ class Application extends \Silex\Application
     }
 
     /**
-     * Override Pimple's offsetGet to add support for initializers
-     *
-     * @param  string $id The unique identifier for the parameter or object
-     * @return mixed      The value of the parameter or an object
-     */
-    public function offsetGet($id)
-    {
-        $value = parent::offsetGet($id);
-        if (is_object($value)) {
-            $this->initialize($value);
-        }
-        return $value;
-    }
-
-    /**
      * Initialize an object
      *
      * @param  mixed $object Object to be initialized
