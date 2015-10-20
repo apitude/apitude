@@ -3,7 +3,9 @@ namespace Apitude\Core\API\Controller;
 
 use Apitude\Core\API\Helper\APIEntityHelperTrait;
 use Apitude\Core\API\Helper\EntityPopulator;
+use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\API\Writer\WriterInterface;
+use Apitude\Core\Application;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
 use Apitude\Core\Provider\Helper\EntityManagerAwareTrait;
@@ -30,6 +32,12 @@ abstract class AbstractCrudController implements ContainerAwareInterface
      * @var WriterInterface
      */
     protected $apiWriter;
+    protected $apiWriterClass = ArrayWriter::class;
+
+    protected function init(Application $app) {
+        $this->setContainer($app);
+        $this->apiWriter = $this->container[$this->apiWriterClass];
+    }
 
     /**
      * @return EntityPopulator
@@ -39,8 +47,9 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         return $this->container[EntityPopulator::class];
     }
 
-    public function create(Request $request)
+    public function create(Application $app, Request $request)
     {
+        $this->init($app);
         $populator = $this->getEntityPopulator();
 
         $class = $this->getEntityClassFromType($this->apiRecordType);
@@ -62,12 +71,14 @@ abstract class AbstractCrudController implements ContainerAwareInterface
     /**
      * Note that route must be set up to include an id parameter
      *
-     * @param Request $request
+     * @param Application $app
      * @param $id
      * @return JsonResponse|Response
+     * @internal param Request $request
      */
-    public function read(Request $request, $id)
+    public function read(Application $app, $id)
     {
+        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -78,8 +89,9 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, $id)
+    public function update(Application $app, Request $request, $id)
     {
+        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -99,8 +111,14 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_OK);
     }
 
-    public function delete(Request $request, $id)
+    /**
+     * @param Application $app
+     * @param $id
+     * @return Response
+     */
+    public function delete(Application $app, $id)
     {
+        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -114,8 +132,13 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function readList()
+    /**
+     * @param Application $app
+     * @return JsonResponse
+     */
+    public function readList(Application $app)
     {
+        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
 
         $result = $this->getEntityManager()->getRepository($class)
