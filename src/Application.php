@@ -1,8 +1,12 @@
 <?php
 namespace Apitude\Core;
 
+use Apitude\Core\Provider\APIServiceProvider;
+use Apitude\Core\Provider\CommandServiceProvider;
 use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\DoctrineServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
+use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 
 class Application extends \Silex\Application
@@ -47,6 +51,8 @@ class Application extends \Silex\Application
             $service->setContainer($app);
         });
 
+        $this->register(new CommandServiceProvider);
+
         if (array_key_exists('service_providers', $config)) {
             $this->registerServiceProviders($config['service_providers']);
         }
@@ -54,6 +60,9 @@ class Application extends \Silex\Application
         if (array_key_exists('configuration.services', $config)) {
             $this->addConfiguredServices($config['configuration.services']);
         }
+        $this->register(new UrlGeneratorServiceProvider);
+        $this->register(new DoctrineServiceProvider);
+        $this->register(new APIServiceProvider);
     }
 
     /**

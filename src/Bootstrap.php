@@ -34,10 +34,6 @@ class Bootstrap
         }
 
         $app = new Application($config);
-        $app->register(new UrlGeneratorServiceProvider);
-        $app->register(new DoctrineServiceProvider);
-        $app->register(new CommandServiceProvider);
-        $app->register(new APIServiceProvider);
 
         return $app;
     }
