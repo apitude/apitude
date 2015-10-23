@@ -1,8 +1,8 @@
 <?php
-if (! file_exists('./vendor/autoload.php')) {
+if (! file_exists(__DIR__.'/vendor/autoload.php')) {
     throw new \RuntimeException('vendor/autoload not found.  Please run composer install');
 }
-require_once './vendor/autoload.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 if (!defined('APP_ENV')) {
     define('APP_ENV', 'development');
