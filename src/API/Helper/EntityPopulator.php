@@ -20,7 +20,7 @@ class EntityPopulator implements ContainerAwareInterface
     {
         $entity = new $class();
         foreach ($attributes as $name => $value) {
-            if (property_exists($this, $name)) {
+            if (property_exists($entity, $name)) {
                 $methodName = $this->getSetterName($entity, $name);
                 if ($methodName) {
                     $entity->{$methodName}($value);
@@ -44,7 +44,7 @@ class EntityPopulator implements ContainerAwareInterface
     public function updateFromArray($entity, array $attributes)
     {
         foreach ($attributes as $name => $value) {
-            if (property_exists($this, $name)) {
+            if (property_exists($entity, $name)) {
                 $methodName = $this->getSetterName($entity, $name);
                 if ($methodName) {
                     $entity->{$methodName}($value);
