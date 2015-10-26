@@ -4,6 +4,7 @@ namespace Apitude\Core;
 use Apitude\Core\Provider\APIServiceProvider;
 use Apitude\Core\Provider\CommandServiceProvider;
 use Apitude\Core\Provider\ContainerAwareInterface;
+use Apitude\Core\Provider\ControllerResolver;
 use Apitude\Core\Provider\DoctrineServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
 use Silex\Provider\UrlGeneratorServiceProvider;
@@ -63,6 +64,11 @@ class Application extends \Silex\Application
         $this->register(new UrlGeneratorServiceProvider);
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
+
+        $app = $this;
+        $this['resolver'] = $this->share(function () use ($app) {
+            return new ControllerResolver($app, $app['logger']);
+        });
     }
 
     /**

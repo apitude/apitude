@@ -1,11 +1,6 @@
 <?php
 namespace Apitude\Core;
 
-use Apitude\Core\Provider\APIServiceProvider;
-use Apitude\Core\Provider\CommandServiceProvider;
-use Apitude\Core\Provider\DoctrineServiceProvider;
-use Silex\Provider\UrlGeneratorServiceProvider;
-
 class Bootstrap
 {
     public function __construct()
