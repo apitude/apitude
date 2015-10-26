@@ -7,6 +7,7 @@ use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ControllerResolver;
 use Apitude\Core\Provider\DoctrineServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
+use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -61,6 +62,12 @@ class Application extends \Silex\Application
         if (array_key_exists('configuration.services', $config)) {
             $this->addConfiguredServices($config['configuration.services']);
         }
+
+        $this->register(
+            new MonologServiceProvider(),
+            $config['monolog'] ?: ['monolog.logfile' => APP_PATH.'/app.log']
+        );
+
         $this->register(new UrlGeneratorServiceProvider);
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
