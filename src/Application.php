@@ -65,7 +65,7 @@ class Application extends \Silex\Application
 
         $this->register(
             new MonologServiceProvider(),
-            $config['monolog'] ?: ['monolog.logfile' => APP_PATH.'/app.log']
+            isset($config['monolog']) ? $config['monolog'] : ['monolog.logfile' => APP_PATH.'/app.log']
         );
 
         $this->register(new UrlGeneratorServiceProvider);
