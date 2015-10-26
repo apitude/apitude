@@ -105,9 +105,10 @@ class Application extends \Silex\Application
         foreach ($providers as $class => $config)
         {
             if (is_numeric($class)) {
-                throw new \RuntimeException('Bad service provider configuration');
+                $this->register(new $config([]));
+            } else {
+                $this->register(new $class(), $config ?: []);
             }
-            $this->register(new $class(), $config ?: []);
         }
     }
 
