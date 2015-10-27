@@ -6,8 +6,10 @@ use Apitude\Core\Provider\CommandServiceProvider;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ControllerResolver;
 use Apitude\Core\Provider\DoctrineServiceProvider;
+use Apitude\Core\Provider\KueServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
 use Asm89\Stack\Cors;
+use Apitude\Core\Provider\RedisServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,6 +75,8 @@ class Application extends \Silex\Application
         $this->register(new UrlGeneratorServiceProvider);
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
+        $this->register(new RedisServiceProvider);
+        $this->register(new KueServiceProvider);
 
         $app = $this;
         $this['resolver'] = $this->share(function () use ($app) {
@@ -187,7 +191,11 @@ class Application extends \Silex\Application
         $console = $this['console'];
         foreach ($commands as $class)
         {
-            $command = new $class;
+            if (is_object($class)) {
+                $command = $class;
+            } else {
+                $command = new $class;
+            }
             $console->add($command);
             foreach ($this['console.configure'] as $callback) {
                 $callback($command);
