@@ -89,11 +89,11 @@ class Application extends \Silex\Application
             'supportsCredentials' => false,
         ];
 
-        $cors = new Cors($app, $corsConfig);
-
-        $app->after(function (Request $request, Response $response) use($cors) {
-            return $cors->handle($request);
-        });
+//        $cors = new Cors($app, $corsConfig);
+// @TODO re-enable after finding why it's looping
+//        $app->after(function (Request $request, Response $response) use($cors) {
+//            return $cors->handle($request);
+//        });
     }
 
     /**
