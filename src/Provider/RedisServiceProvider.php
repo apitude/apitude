@@ -18,7 +18,9 @@ class RedisServiceProvider implements ServiceProviderInterface
         $app['redis'] = $app->share(function ($app) {
             $config = $app['config'];
             $redis = new \Redis();
-            $redis->connect($config['redis']['host'], $config['redis']['port']);
+            if (!$redis->connect($config['redis']['host'], $config['redis']['port'])) {
+                throw new \RuntimeException('Unable to connect to redis server');
+            }
             return $redis;
         });
     }
