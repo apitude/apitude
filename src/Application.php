@@ -7,9 +7,11 @@ use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ControllerResolver;
 use Apitude\Core\Provider\DoctrineServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
+use Asm89\Stack\Cors;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Application extends \Silex\Application
 {
@@ -75,6 +77,22 @@ class Application extends \Silex\Application
         $app = $this;
         $this['resolver'] = $this->share(function () use ($app) {
             return new ControllerResolver($app, $app['logger']);
+        });
+
+
+        $corsConfig = isset($config['cors']) ? $config['cors'] : [
+            'allowedHeaders' => ['*'],
+            'allowedMethods' => ['*'],
+            'allowedOrigins' => ['*'],
+            'exposedHeaders' => false,
+            'maxAge' => false,
+            'supportsCredentials' => false,
+        ];
+
+        $cors = new Cors($app, $corsConfig);
+
+        $app->after(function (Request $request, Response $response) use($cors) {
+            return $cors->handle($request);
         });
     }
 
