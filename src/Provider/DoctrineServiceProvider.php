@@ -39,9 +39,13 @@ class DoctrineServiceProvider extends AbstractServiceProvider implements Service
             new DoctrineOrmServiceProvider(),
             $app['config']['orm.options']
         );
-        $app->register(new MigrationServiceProvider(), [
-            'db.migrations.path' =>$app['config']['migrations.directory'],
-        ]);
+
+        if (getenv('MIGRATION_COMMANDS')) {
+            $app->register(new MigrationServiceProvider(), [
+                'db.migrations.path' =>$app['config']['migrations.directory'],
+            ]);
+        }
+
         $app['orm.em'] = $app->extend('orm.em', function(EntityManagerInterface $em) {
             if (file_exists(APP_PATH.'/vendor/apitude/apitude/src/Annotations/APIAnnotations.php')) {
                 AnnotationRegistry::registerFile(APP_PATH.'/vendor/apitude/apitude/src/Annotations/APIAnnotations.php');
