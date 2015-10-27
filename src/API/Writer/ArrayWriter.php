@@ -81,4 +81,27 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
 
         return $result;
     }
+
+    /**
+     * @param  array $array
+     * @param  int   $totalRecords
+     * @param  int   $page
+     * @param  int   $resultsPerPage
+     * @return array
+     */
+    public function writeObjectArray(array $array, $totalRecords, $page, $resultsPerPage)
+    {
+        $result = [
+            'total'            => $totalRecords,
+            'page'             => $page,
+            'results_per_page' => $resultsPerPage,
+            'data'             => [],
+        ];
+
+        foreach ($array as $entity) {
+            $result['data'][] = $this->writeObject($entity);
+        }
+
+        return $result;
+    }
 }
