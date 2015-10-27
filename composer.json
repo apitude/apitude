@@ -11,7 +11,8 @@
   ],
   "prefer-stable": true,
   "bin": [
-    "apicon"
+    "apicon",
+    "apidb"
   ],
   "minimum-stability": "dev",
   "require": {

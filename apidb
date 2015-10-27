@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+/*
+ * @codingStandardsIgnoreFile
+ */
+/** @var \Apitude\Application $app */
+if (!defined('APP_PATH')) {
+    define('APP_PATH', realpath(__DIR__.'/../../..'));
+}
+$_ENV['MIGRATION_COMMANDS'] = 1;
+$app = require_once APP_PATH.'/bootstrap.php';
+$app->runConsole();
