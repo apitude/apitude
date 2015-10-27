@@ -1,5 +1,5 @@
 <?php
-namespace Provider;
+namespace Apitude\Core\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
