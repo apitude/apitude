@@ -55,6 +55,14 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
                 $value = $service->{$method}($value);
             }
 
+            if (is_array($value)) {
+                $value = $this->writeObjectArray($value);
+            }
+
+            if ($value instanceof Collection) {
+                $value = $this->writeCollection($value);
+            }
+
             if (is_object($value)) {
                 $value = $this->writeObject($value);
             }
@@ -89,7 +97,7 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
      * @param  int   $resultsPerPage
      * @return array
      */
-    public function writeObjectArray(array $array, $totalRecords, $page, $resultsPerPage)
+    public function writeObjectArrayWithPagination(array $array, $totalRecords, $page, $resultsPerPage)
     {
         $result = [
             'total'            => $totalRecords,
@@ -98,8 +106,21 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
             'data'             => [],
         ];
 
+        $result['data'] = $this->writeObjectArray($array);
+
+        return $result;
+    }
+
+    /**
+     * @param  array  $array
+     * @return array
+     */
+    protected function writeObjectArray(array $array)
+    {
+        $result = [];
+
         foreach ($array as $entity) {
-            $result['data'][] = $this->writeObject($entity);
+            $result[] = $this->writeObject($entity);
         }
 
         return $result;
