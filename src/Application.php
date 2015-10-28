@@ -2,6 +2,7 @@
 namespace Apitude\Core;
 
 use Apitude\Core\Provider\APIServiceProvider;
+use Apitude\Core\Provider\CacheServiceProvider;
 use Apitude\Core\Provider\CommandServiceProvider;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ControllerResolver;
@@ -73,6 +74,7 @@ class Application extends \Silex\Application
         );
 
         $this->register(new UrlGeneratorServiceProvider);
+        $this->register(new CacheServiceProvider);
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
         $this->register(new RedisServiceProvider);

@@ -7,7 +7,9 @@ use Apitude\Core\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Cache\RedisCache;
 use Doctrine\Common\EventManager;
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
@@ -46,11 +48,14 @@ class DoctrineServiceProvider extends AbstractServiceProvider implements Service
             ]);
         }
 
-        $app['orm.em'] = $app->extend('orm.em', function(EntityManagerInterface $em) {
+        $app['orm.em'] = $app->extend('orm.em', function(EntityManagerInterface $em) use($app) {
             if (file_exists(APP_PATH.'/vendor/apitude/apitude/src/Annotations/APIAnnotations.php')) {
                 AnnotationRegistry::registerFile(APP_PATH.'/vendor/apitude/apitude/src/Annotations/APIAnnotations.php');
             }
-            $em->getConfiguration()->addCustomHydrationMode('simple', SimpleHydrator::class);
+            /** @var Configuration $config */
+            $config = $em->getConfiguration();
+            $config->setMetadataCacheImpl($app['cache']);
+            $config->addCustomHydrationMode('simple', SimpleHydrator::class);
             return $em;
         });
     }
