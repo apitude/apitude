@@ -67,11 +67,13 @@ class DoctrineServiceProvider extends AbstractServiceProvider implements Service
     {
         $config = $app['config'];
         if (isset($config['orm.subscribers'])) {
-            /** @var EventManager $eventMgr */
-            $eventMgr = $app['db.event_manager'];
-            foreach ($config['orm.subscribers'] as $class) {
-                $eventMgr->addEventSubscriber(new $class());
-            }
+            $app->extend('db.event_manager', function($eventMgr) use($app, $config) {
+                /** @var EventManager $eventMgr */
+                foreach ($config['orm.subscribers'] as $class) {
+                    $eventMgr->addEventSubscriber(new $class());
+                }
+                return $eventMgr;
+            });
         }
     }
 }
