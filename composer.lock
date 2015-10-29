@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "79b70c0c924ef4043bb1607d1399793e",
-    "content-hash": "332127470b15745f5296c6085c736d02",
+    "hash": "d31b1c30bf8064a891175dd3b14de865",
+    "content-hash": "a1a5c732ac2c944a53ed84d91f2f7819",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -51,63 +51,42 @@
             "time": "2014-07-28 07:22:35"
         },
         {
-            "name": "chh/kue",
-            "version": "dev-master",
+            "name": "contatta/qless-php",
+            "version": "dev-fixed",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CHH/kue.git",
-                "reference": "1082a16929583a85f82134d2f348159e89313357"
+                "url": "https://github.com/baohx2000/qless-php.git",
+                "reference": "7e7ed5af57ab78948f72002d329b76cee2f42f34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CHH/kue/zipball/1082a16929583a85f82134d2f348159e89313357",
-                "reference": "1082a16929583a85f82134d2f348159e89313357",
+                "url": "https://api.github.com/repos/baohx2000/qless-php/zipball/7e7ed5af57ab78948f72002d329b76cee2f42f34",
+                "reference": "7e7ed5af57ab78948f72002d329b76cee2f42f34",
                 "shasum": ""
             },
             "require": {
-                "evenement/evenement": "~1.0",
-                "php": ">=5.3.3"
+                "ext-pcntl": "*",
+                "php": ">=5.3.0",
+                "psr/log": "1.0.0"
             },
             "require-dev": {
-                "aws/aws-sdk-php": "~2.1.1",
-                "chh/bob": "~1.0@dev",
-                "monolog/monolog": "~1.2",
-                "mtdowling/cron-expression": "~1.0",
-                "phpunit/phpunit": "~3.7",
-                "symfony/console": "~2.1"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "AmazonSqsQueue",
-                "ext-redis": "Enable RedisQueue",
-                "monolog/monolog": "Used by the console command",
-                "mtdowling/cron-expression": "Enable CRON expressions",
-                "symfony/console": "Used by the console command"
+                "phpunit/phpunit": "~4"
             },
             "type": "library",
             "autoload": {
                 "psr-0": {
-                    "Kue\\": "lib/",
-                    "Kue\\Test\\": "tests/"
+                    "Qless": "lib"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
             "authors": [
                 {
-                    "name": "Christoph Hochstrasser",
-                    "email": "christoph.hochstrasser@gmail.com",
-                    "homepage": "http://christophh.net"
+                    "name": "contatta",
+                    "email": "dev@contatta.com"
                 }
             ],
-            "description": "A simple interface to multiple job queue implemenations",
-            "keywords": [
-                "background processing",
-                "jobs",
-                "queue"
-            ],
-            "time": "2014-03-08 12:30:54"
+            "description": "qless client implementation for PHP",
+            "time": "2015-09-19 22:33:26"
         },
         {
             "name": "dbtlr/silex-doctrine-migrations",
@@ -888,46 +867,6 @@
             "time": "2015-08-31 12:59:39"
         },
         {
-            "name": "evenement/evenement",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/igorw/evenement.git",
-                "reference": "fa966683e7df3e5dd5929d984a44abfbd6bafe8d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/igorw/evenement/zipball/fa966683e7df3e5dd5929d984a44abfbd6bafe8d",
-                "reference": "fa966683e7df3e5dd5929d984a44abfbd6bafe8d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Evenement": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch",
-                    "homepage": "http://wiedler.ch/igor/"
-                }
-            ],
-            "description": "Événement is a very simple event dispatching library for PHP 5.3",
-            "keywords": [
-                "event-dispatcher"
-            ],
-            "time": "2012-05-30 15:01:08"
-        },
-        {
             "name": "jms/metadata",
             "version": "1.5.1",
             "source": {
@@ -1097,50 +1036,6 @@
                 "psr-3"
             ],
             "time": "2015-10-14 12:51:02"
-        },
-        {
-            "name": "mtdowling/cron-expression",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mtdowling/cron-expression.git",
-                "reference": "d76d5008964f31f8f0223829ec34f2bcac2f2e57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mtdowling/cron-expression/zipball/d76d5008964f31f8f0223829ec34f2bcac2f2e57",
-                "reference": "d76d5008964f31f8f0223829ec34f2bcac2f2e57",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Cron": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
-            "keywords": [
-                "cron",
-                "schedule"
-            ],
-            "time": "2015-10-11 18:58:01"
         },
         {
             "name": "pimple/pimple",
@@ -1807,6 +1702,46 @@
                 "unit testing"
             ],
             "time": "2015-10-02 09:38:59"
+        },
+        {
+            "name": "evenement/evenement",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorw/evenement.git",
+                "reference": "fa966683e7df3e5dd5929d984a44abfbd6bafe8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/fa966683e7df3e5dd5929d984a44abfbd6bafe8d",
+                "reference": "fa966683e7df3e5dd5929d984a44abfbd6bafe8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Evenement": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch",
+                    "homepage": "http://wiedler.ch/igor/"
+                }
+            ],
+            "description": "Événement is a very simple event dispatching library for PHP 5.3",
+            "keywords": [
+                "event-dispatcher"
+            ],
+            "time": "2012-05-30 15:01:08"
         },
         {
             "name": "facebook/webdriver",
@@ -3135,8 +3070,7 @@
     "stability-flags": {
         "dbtlr/silex-doctrine-migrations": 20,
         "monolog/monolog": 20,
-        "chh/kue": 20,
-        "mtdowling/cron-expression": 20
+        "contatta/qless-php": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

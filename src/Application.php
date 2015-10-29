@@ -7,7 +7,6 @@ use Apitude\Core\Provider\CommandServiceProvider;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ControllerResolver;
 use Apitude\Core\Provider\DoctrineServiceProvider;
-use Apitude\Core\Provider\KueServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
 use Asm89\Stack\Cors;
 use Apitude\Core\Provider\RedisServiceProvider;
@@ -78,7 +77,6 @@ class Application extends \Silex\Application
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
         $this->register(new RedisServiceProvider);
-        $this->register(new KueServiceProvider);
 
         $app = $this;
         $this['resolver'] = $this->share(function () use ($app) {
