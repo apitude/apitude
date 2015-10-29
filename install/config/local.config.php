@@ -44,5 +44,10 @@ return [
     'redis' => [
         'host' => 'localhost',
         'port' => 6379
+    ],
+
+    'qless' => [
+        'host' => 'localhost',
+        'port' => 6379
     ]
 ];

@@ -1,0 +1,146 @@
+#!/usr/bin/env php
+<?php
+/*
+ * @codingStandardsIgnoreFile
+ */
+/** @var \Apitude\Core\Application $app */
+if (!defined('APP_PATH')) {
+    define('APP_PATH', realpath(__DIR__.'/../../..'));
+}
+
+if (!file_exists(APP_PATH.'/logs')) {
+    if (!mkdir(APP_PATH.'/logs')) {
+        throw new \Exception('Unable to create logs folder');
+    }
+}
+
+require_once APP_PATH . '/vendor/composer/ClassLoader.php';
+
+$loader = new \Composer\Autoload\ClassLoader();
+$loader->set('Qless', APP_PATH . '/vendor/contatta/qless-php/lib');
+$loader->set('Psr\\Log', APP_PATH . '/vendor/psr/log');
+$loader->set('Monolog', APP_PATH . '/vendor/monolog/monolog/src');
+$loader->register(true);
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+$VERSION = '1.0';
+
+class ApiJobHandler
+{
+    public function perform(\Qless\Job $job) {
+        $app = require_once APP_PATH.'/bootstrap.php';
+        $data = $job->getData();
+        if (!$data['klass']) {
+            $job->fail($job->getWorkerName(), 'No service specified to run job');
+            return;
+        }
+        if (!$data['method']) {
+            $data['method'] = 'perform';
+        }
+
+        $service = $app[$data['service']];
+        if (!method_exists($service, $data['method'])) {
+            $job->fail($job->getWorkerName(), "Missing {$data['method']} method on {$data['service']}");
+            return;
+        }
+
+        $service->{$data['method']}($job, $data['payload']);
+        $app->shutdown();
+    }
+}
+
+$opts = getopt('h', ['worker:', 'queues:', 'help', 'server:', 'port:', 'level:', 'levels', 'mode:']);
+
+if (isset($opts['h']) || isset($opts['help'])) {
+
+    $name = basename($argv[0]);
+
+    $HELP_TEXT = <<<HELP
+
+{$name} {$VERSION}
+
+Usage: {$name} [options] --worker=name --queues=queues
+
+Options:
+
+  --server=name       Hostname of Redis job server
+  --port=port         Port of Redis job server
+  --interval=seconds  Polling interval to check for new jobs
+  --level=LEVEL       Specify logging level [default=INFO]
+  --levels            List available logging levels
+  --logtofile
+
+
+HELP;
+
+    printf($HELP_TEXT);
+    exit(1);
+}
+
+// set options
+$server = isset($opts['server']) ? $opts['server'] : 'localhost';
+$port = isset($opts['port']) ? intval($opts['port']) : 6380;
+
+$interval = isset($opts['interval']) ? intval($opts['interval']) : 1;
+$queueMode = isset($opts['mode']) ? $opts['mode'] : null;
+$logLevels = Logger::getLevels();
+function print_levels($levels) {
+    foreach ($levels as $level => $_) {
+        printf(" %s\n", $level);
+    }
+    exit(0);
+}
+
+if (isset($opts['levels'])) {
+    print_levels($logLevels);
+}
+
+if (isset($opts['level'])) {
+    $logLevel = strtoupper($opts['level']);
+    if (!isset($logLevels[$logLevel])) {
+        fprintf(STDERR, "Invalid log level '$logLevel' specified; use \n");
+        print_levels($logLevels);
+    }
+} else {
+    $logLevel = 'INFO';
+}
+
+$logLevel = $logLevels[$logLevel];
+
+$workerName = null;
+if (isset($opts['worker'])) {
+    $workerName = $opts['worker'];
+} else {
+    fprintf(STDOUT, 'No worker provided' . PHP_EOL);
+    exit(1);
+}
+
+$queueIncludes = [];
+if (isset($opts['queues'])) {
+    $queueIncludes = explode(',', $opts['queues']);
+} else {
+    throw new \Exception('Must specify queues to process with --include-queues');
+}
+
+$useQueues = null;
+if (!empty($queueIncludes)) {
+    $useQueues = $queueIncludes;
+}
+
+$client = new Qless\Client($server, $port);
+$worker = new Qless\Worker($workerName, $useQueues, $client, $interval);
+$log = new Logger('Apitude');
+$log->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', $logLevel));
+$log->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
+$log->pushProcessor(new \Monolog\Processor\ProcessIdProcessor());
+
+if (isset($opts['logtofile'])) {
+    $logtxt = new StreamHandler(APP_PATH.'/logs/apiworker.log');
+    $log->pushHandler($logtxt);
+}
+
+$worker->setLogger($log);
+$worker->registerJobPerformHandler("ApiJobHandler");
+
+$worker->run();

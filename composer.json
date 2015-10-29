@@ -11,6 +11,7 @@
   ],
   "prefer-stable": true,
   "bin": [
+    "apiworker",
     "apicon",
     "apidb"
   ],

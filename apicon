@@ -3,7 +3,7 @@
 /*
  * @codingStandardsIgnoreFile
  */
-/** @var \Apitude\Application $app */
+/** @var \Apitude\Core\Application $app */
 if (!defined('APP_PATH')) {
     define('APP_PATH', realpath(__DIR__.'/../../..'));
 }
