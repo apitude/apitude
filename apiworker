@@ -80,7 +80,7 @@ HELP;
 
 // set options
 $server = isset($opts['server']) ? $opts['server'] : 'localhost';
-$port = isset($opts['port']) ? intval($opts['port']) : 6380;
+$port = isset($opts['port']) ? intval($opts['port']) : 6379;
 
 $interval = isset($opts['interval']) ? intval($opts['interval']) : 1;
 $queueMode = isset($opts['mode']) ? $opts['mode'] : null;
