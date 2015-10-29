@@ -31,13 +31,19 @@ abstract class AbstractCrudController implements ContainerAwareInterface
     /**
      * @var WriterInterface
      */
-    protected $apiWriter;
-    protected $apiWriterClass = ArrayWriter::class;
+    private $apiWriter;
 
-    protected function init(Application $app) {
-        $this->setContainer($app);
-        $this->apiWriter = $this->container[$this->apiWriterClass];
+    /**
+     * @return WriterInterface
+     */
+    protected function getApiWriter() {
+        if (!$this->apiWriter) {
+            $this->apiWriter = $this->container[$this->apiWriterClass];
+        }
+        return $this->apiWriter;
     }
+
+    protected $apiWriterClass = ArrayWriter::class;
 
     /**
      * @return EntityPopulator
@@ -47,9 +53,8 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         return $this->container[EntityPopulator::class];
     }
 
-    public function create(Application $app, Request $request)
+    public function create(Request $request)
     {
-        $this->init($app);
         $populator = $this->getEntityPopulator();
 
         $class = $this->getEntityClassFromType($this->apiRecordType);
@@ -65,20 +70,18 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
 
-        return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_CREATED);
+        return new JsonResponse($this->getApiWriter()->writeObject($entity), Response::HTTP_CREATED);
     }
 
     /**
      * Note that route must be set up to include an id parameter
      *
-     * @param Application $app
      * @param $id
      * @return JsonResponse|Response
      * @internal param Request $request
      */
-    public function read(Application $app, $id)
+    public function read($id)
     {
-        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -86,12 +89,11 @@ abstract class AbstractCrudController implements ContainerAwareInterface
             return new Response('', Response::HTTP_NOT_FOUND);
         }
 
-        return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_CREATED);
+        return new JsonResponse($this->getApiWriter()->writeObject($entity), Response::HTTP_CREATED);
     }
 
-    public function update(Application $app, Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -108,17 +110,15 @@ abstract class AbstractCrudController implements ContainerAwareInterface
         $entity = $this->getEntityPopulator()->updateFromArray($entity, $data);
         $this->getEntityManager()->flush();
 
-        return new JsonResponse($this->apiWriter->writeObject($entity), Response::HTTP_OK);
+        return new JsonResponse($this->getApiWriter()->writeObject($entity), Response::HTTP_OK);
     }
 
     /**
-     * @param Application $app
      * @param $id
      * @return Response
      */
-    public function delete(Application $app, $id)
+    public function delete($id)
     {
-        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
         $entity = $this->getEntityManager()->find($class, $id);
 
@@ -133,12 +133,10 @@ abstract class AbstractCrudController implements ContainerAwareInterface
     }
 
     /**
-     * @param Application $app
      * @return JsonResponse
      */
-    public function readList(Application $app)
+    public function readList()
     {
-        $this->init($app);
         $class = $this->getEntityClassFromType($this->apiRecordType);
 
         $result = $this->getEntityManager()->getRepository($class)
@@ -146,6 +144,6 @@ abstract class AbstractCrudController implements ContainerAwareInterface
 
         $collection = new ArrayCollection($result);
 
-        return new JsonResponse($this->apiWriter->writeCollection($collection), Response::HTTP_OK);
+        return new JsonResponse($this->getApiWriter()->writeCollection($collection), Response::HTTP_OK);
     }
 }
