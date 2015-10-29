@@ -115,8 +115,10 @@ if (isset($opts['worker'])) {
 $queueIncludes = [];
 if (isset($opts['queues'])) {
     $queueIncludes = explode(',', $opts['queues']);
+} elseif(getenv('QUEUES')) {
+    $queueIncludes = explode(',', getenv('QUEUES'));
 } else {
-    throw new \Exception('Must specify queues to process with --include-queues');
+    throw new \Exception('Must specify queues to process with --queues or set a list of queues using the QUEUES env variable');
 }
 
 $useQueues = null;
