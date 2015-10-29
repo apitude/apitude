@@ -35,7 +35,8 @@ trait QlessAwareTrait
         if ($method) {
             $data['method'] = $method;
         }
-        return $this->getJobManager()->put(null, $queue, null, null, $payload, $delay);
+        $jid = sha1(microtime());
+        return $this->getJobManager()->put(null, $queue, $jid, null, json_encode($data), $delay);
     }
 
     /**

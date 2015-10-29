@@ -31,11 +31,7 @@ class ApiJobHandler
     public function perform(\Qless\Job $job) {
         $app = require_once APP_PATH.'/bootstrap.php';
         $data = $job->getData();
-        if (!$data['klass']) {
-            $job->fail($job->getWorkerName(), 'No service specified to run job');
-            return;
-        }
-        if (!$data['method']) {
+        if (!isset($data['method'])) {
             $data['method'] = 'perform';
         }
 
@@ -50,7 +46,7 @@ class ApiJobHandler
     }
 }
 
-$opts = getopt('h', ['worker:', 'queues:', 'help', 'server:', 'port:', 'level:', 'levels', 'mode:']);
+$opts = getopt('h', ['worker:', 'queues:', 'help', 'server:', 'port:', 'level:', 'levels', 'mode:', 'logtofile']);
 
 if (isset($opts['h']) || isset($opts['help'])) {
 
@@ -79,7 +75,7 @@ HELP;
 }
 
 // set options
-$server = isset($opts['server']) ? $opts['server'] : 'localhost';
+$server = isset($opts['server']) ? $opts['server'] : '127.0.0.1';
 $port = isset($opts['port']) ? intval($opts['port']) : 6379;
 
 $interval = isset($opts['interval']) ? intval($opts['interval']) : 1;
@@ -135,7 +131,7 @@ $log->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', $logLevel))
 $log->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
 $log->pushProcessor(new \Monolog\Processor\ProcessIdProcessor());
 
-if (isset($opts['logtofile'])) {
+if (array_key_exists('logtofile', $opts)) {
     $logtxt = new StreamHandler(APP_PATH.'/logs/apiworker.log');
     $log->pushHandler($logtxt);
 }

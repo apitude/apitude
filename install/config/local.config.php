@@ -42,12 +42,12 @@ return [
     // You may include a cache.redis array including "host" and "port" if you do not wish to use the default redis
     // configuration
     'redis' => [
-        'host' => 'localhost',
+        'host' => '127.0.0.1',
         'port' => 6379
     ],
 
     'qless' => [
-        'host' => 'localhost',
+        'host' => '127.0.0.1',
         'port' => 6379
-    ]
+    ],
 ];
