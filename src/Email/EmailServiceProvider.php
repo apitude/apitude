@@ -1,6 +1,7 @@
 <?php
 namespace Apitude\Core\Email;
 
+use Apitude\Core\Email\Commands\SendMessage;
 use Apitude\Core\Email\Service\MandrillSender;
 use Apitude\Core\Email\Service\SimpleSender;
 use Apitude\Core\Provider\AbstractServiceProvider;
@@ -8,6 +9,10 @@ use Silex\Application;
 
 class EmailServiceProvider extends AbstractServiceProvider
 {
+    protected $commands = [
+        SendMessage::class,
+    ];
+
     protected $services = [
         MandrillSender::class,
         SimpleSender::class,
@@ -16,13 +21,16 @@ class EmailServiceProvider extends AbstractServiceProvider
 
     public function register(Application $app)
     {
-        if (!array_key_exists('mandrill_api_key', $app['config']['email'])) {
-            $app['config'] = $app->extend('config', function($config) {
-                if (!isset($config['email'])) {
-                    $config['email'] = [];
-                }
-                $config['email']['mandrill_api_key'] = getenv('MANDRILL_API_KEY');
-            });
+        parent::register($app);
+        $config = $app['config'];
+        if (!isset($config['email'])) {
+            $config['email'] = ['sender' => SimpleSender::class];
         }
+        if (!array_key_exists('mandrill_api_key', $app['config']['email'])) {
+            if (getenv('MANDRILL_API_KEY')) {
+                $config['email']['mandrill_api_key'] = getenv('MANDRILL_API_KEY');
+            }
+        }
+        $app['config'] = $config;
     }
 }

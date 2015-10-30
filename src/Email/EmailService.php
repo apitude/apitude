@@ -25,6 +25,7 @@ class EmailService implements ContainerAwareInterface, SenderInterface, QlessAwa
         if (!$sender) {
             throw new \RuntimeException('Email sender not configured');
         }
+        return $sender;
     }
 
     /**
