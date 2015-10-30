@@ -18,7 +18,7 @@ class MandrillSender implements SenderInterface, ContainerAwareInterface
      */
     protected function getMandrill()
     {
-        return new Mailer(new MessageExporter(), new Mandrill($this->container['config']['mandrill_api_key']));
+        return new Mailer(new MessageExporter(), new Mandrill($this->container['config']['email']['mandrill_api_key']));
     }
 
     /**
