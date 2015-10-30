@@ -114,8 +114,8 @@ class EmailService implements ContainerAwareInterface, SenderInterface, QlessAwa
      * Queues an email to be sent
      * @param string $type (SEND_BODY|SEND_TEMPLATE)
      * @param array $to
-     * @param string $fromName
      * @param string $fromEmail
+     * @param string $fromName
      * @param string $subject
      * @param null|string $body
      * @param string $contentType
@@ -129,8 +129,8 @@ class EmailService implements ContainerAwareInterface, SenderInterface, QlessAwa
     public function queueEmail(
         $type,
         $to,
-        $fromName,
         $fromEmail,
+        $fromName,
         $subject,
         $body = null,
         $contentType = 'text/html',
