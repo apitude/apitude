@@ -1,6 +1,7 @@
 <?php
 namespace Apitude\Core;
 
+use Apitude\Core\Email\EmailServiceProvider;
 use Apitude\Core\Provider\APIServiceProvider;
 use Apitude\Core\Provider\CacheServiceProvider;
 use Apitude\Core\Provider\CommandServiceProvider;
@@ -78,6 +79,7 @@ class Application extends \Silex\Application
         $this->register(new DoctrineServiceProvider);
         $this->register(new APIServiceProvider);
         $this->register(new QlessServiceProvider);
+        $this->register(new EmailServiceProvider);
         $this->register(new RedisServiceProvider);
 
         $app = $this;

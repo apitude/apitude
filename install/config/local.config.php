@@ -34,7 +34,7 @@ return [
         // example : MyServiceProvider::class => ['configKey' => 37, ...]
     ],
 
-    // commands to register
+    // commands to register (but you should do this from your service providers
     'commands' => [
         // [class]
     ],
@@ -49,5 +49,9 @@ return [
     'qless' => [
         'host' => '127.0.0.1',
         'port' => 6379
+    ],
+
+    'email' => [
+        'sender' => \Apitude\Core\Email\Service\SimpleSender::class,
     ],
 ];
