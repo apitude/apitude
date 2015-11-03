@@ -17,13 +17,12 @@ class ControllerResolver extends \Silex\ControllerResolver
         }
         // standard class:method
         list($class, $method) = explode('::', $controller, 2);
-        if (!class_exists($class)) {
-            // try as a service identifier
-            if (isset($this->app[$class])) {
-                $controller = $this->app[$class];
-            } else {
-                throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
-            }
+
+        // try as a service identifier
+        if (isset($this->app[$class])) {
+            $controller = $this->app[$class];
+        } elseif (!class_exists($class)) {
+            throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
         } else {
             $controller = new $class();
         }
