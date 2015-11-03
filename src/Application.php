@@ -96,12 +96,6 @@ class Application extends \Silex\Application
             'maxAge' => false,
             'supportsCredentials' => false,
         ];
-
-//        $cors = new Cors($app, $corsConfig);
-// @TODO re-enable after finding why it's looping
-//        $app->after(function (Request $request, Response $response) use($cors) {
-//            return $cors->handle($request);
-//        });
     }
 
     /**
@@ -209,7 +203,25 @@ class Application extends \Silex\Application
 
     public function run(Request $request = null)
     {
-        parent::run($request);
+        if (null === $request) {
+            $request = Request::createFromGlobals();
+        }
+
+        $corsConfig = isset($config['cors']) ? $config['cors'] : [
+            'allowedHeaders'      => ['*'],
+            'allowedMethods'      => ['*'],
+            'allowedOrigins'      => ['*'],
+            'exposedHeaders'      => false,
+            'maxAge'              => false,
+            'supportsCredentials' => false,
+        ];
+
+        $cors = new Cors($this, $corsConfig);
+
+        $response = $cors->handle($request);
+        $response->send();
+
+        $this->terminate($request, $response);
         $this->shutdown();
     }
 
