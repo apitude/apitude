@@ -26,7 +26,7 @@ class EmailServiceProvider extends AbstractServiceProvider
         if (!isset($config['email'])) {
             $config['email'] = ['sender' => SimpleSender::class];
         }
-        if (!array_key_exists('mandrill_api_key', $app['config']['email'])) {
+        if (!array_key_exists('mandrill_api_key', $config['email'])) {
             if (getenv('MANDRILL_API_KEY')) {
                 $config['email']['mandrill_api_key'] = getenv('MANDRILL_API_KEY');
             }
