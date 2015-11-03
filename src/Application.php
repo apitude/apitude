@@ -86,16 +86,6 @@ class Application extends \Silex\Application
         $this['resolver'] = $this->share(function () use ($app) {
             return new ControllerResolver($app, $app['logger']);
         });
-
-
-        $corsConfig = isset($config['cors']) ? $config['cors'] : [
-            'allowedHeaders' => ['*'],
-            'allowedMethods' => ['*'],
-            'allowedOrigins' => ['*'],
-            'exposedHeaders' => false,
-            'maxAge' => false,
-            'supportsCredentials' => false,
-        ];
     }
 
     /**
