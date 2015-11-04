@@ -115,7 +115,7 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
      * @param  array  $array
      * @return array
      */
-    protected function writeObjectArray(array $array)
+    public function writeObjectArray(array $array)
     {
         $result = [];
 
