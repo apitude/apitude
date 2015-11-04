@@ -4,6 +4,7 @@ namespace Apitude\Core\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\HttpFoundation\RequestMatcher;
 
 /**
  * Class AbstractServiceProvider
@@ -73,5 +74,40 @@ abstract class AbstractServiceProvider implements ServiceProviderInterface
     public function boot(Application $app)
     {
         // nope.
+    }
+
+    /**
+     * Add a firewall record
+     * @param Application $app
+     * @param string|RequestMatcher $pattern
+     * @param string $authType (oauth, anonymous, oauth-optional, etc)
+     */
+    protected function addFirewall(Application $app, $pattern, $authType)
+    {
+        $firewalls = $app['security.firewalls'];
+        $key = is_object($pattern) ? spl_object_hash($pattern) : $pattern;
+        $firewalls[$key] =  [
+            'pattern' => $pattern,
+            $authType => true,
+        ];
+
+        $app['security.firewalls'] = $firewalls;
+    }
+
+    /**
+     * Add access rule to limit specific paths by role
+     * @param Application $app
+     * @param string $pattern
+     * @param string|array $roles
+     */
+    protected function addAccessRule(Application $app, $pattern, $roles) {
+        $security = $app['security.access_rules'];
+        $key = is_object($pattern) ? spl_object_hash($pattern) : $pattern;
+        $security[$key] = [
+            $pattern,
+            $roles
+        ];
+
+        $app['security.access_rules'] = $security;
     }
 }
