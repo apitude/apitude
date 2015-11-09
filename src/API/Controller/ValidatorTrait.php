@@ -54,7 +54,7 @@ trait ValidatorTrait
      * @param  ConstraintViolationListInterface $violationList List being formatted
      * @return array
      */
-    public function groupViolationsByField(ConstraintViolationListInterface $violationList)
+    public function getViolationRecursiveArray(ConstraintViolationListInterface $violationList)
     {
         $errors = [];
 
@@ -116,7 +116,7 @@ trait ValidatorTrait
      * @param  ConstraintViolationInterface $violation Violation whose path to return
      * @return array
      */
-    protected function getPropertyPathAsArray(ConstraintViolationInterface $violation)
+    private function getPropertyPathAsArray(ConstraintViolationInterface $violation)
     {
         $path = $violation->getPropertyPath();
 
@@ -130,7 +130,7 @@ trait ValidatorTrait
      * @param ConstraintViolationInterface|ConstraintViolation $error
      * @return array
      */
-    protected function getValidationErrorArray($error)
+    private function getValidationErrorArray($error)
     {
         return [
             'i18nKey' => method_exists($error->getConstraint(), 'getI18nKey') ?
