@@ -5,7 +5,6 @@ use Apitude\Core\API\Helper\APIEntityHelperTrait;
 use Apitude\Core\API\Helper\EntityPopulator;
 use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\API\Writer\WriterInterface;
-use Apitude\Core\Application;
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
 use Apitude\Core\Provider\Helper\EntityManagerAwareTrait;
