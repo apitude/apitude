@@ -59,7 +59,7 @@ trait ValidatorTrait
         $errors = [];
 
         foreach ($violationList as $violation) {
-            $errors = self::addViolationToOutput($errors, $violation);
+            $errors = $this->addViolationToOutput($errors, $violation);
         }
 
         return $errors;
@@ -75,7 +75,7 @@ trait ValidatorTrait
      */
     private function addViolationToOutput(array $errors, ConstraintViolationInterface $violation)
     {
-        $path = self::getPropertyPathAsArray($violation);
+        $path = $this->getPropertyPathAsArray($violation);
 
         // Drill into errors and find where the error message should be added, building nonexistent portions of the path
         $currentPointer = &$errors;
