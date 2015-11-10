@@ -5,7 +5,8 @@
  */
 /** @var \Apitude\Core\Application $app */
 if (!defined('APP_PATH')) {
-    define('APP_PATH', realpath(__DIR__.'/../../..'));
+    define('APP_PATH', realpath(__DIR__.'/../../../..'));
 }
+putenv('MIGRATION_COMMANDS=1');
 $app = require_once APP_PATH.'/bootstrap.php';
 $app->runConsole();

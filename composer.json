@@ -11,9 +11,9 @@
   ],
   "prefer-stable": true,
   "bin": [
-    "apiworker",
-    "apicon",
-    "apidb"
+    "bin/apiworker",
+    "bin/apicon",
+    "bin/apidb"
   ],
   "minimum-stability": "dev",
   "require": {
