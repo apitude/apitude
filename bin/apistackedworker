@@ -15,6 +15,7 @@ if (!file_exists(APP_PATH.'/logs')) {
 }
 
 require_once APP_PATH . '/vendor/composer/ClassLoader.php';
+require_once APP_PATH . '/vendor/apitude/apitude/src/Qless/StackWorker.php';
 
 $loader = new \Composer\Autoload\ClassLoader();
 $loader->set('Qless', APP_PATH . '/vendor/contatta/qless-php/lib');
@@ -139,7 +140,7 @@ if (!empty($queueIncludes)) {
 }
 
 $client = new Qless\Client($server, $port);
-$worker = new Qless\Worker($workerName, $useQueues, $client, $interval);
+$worker = new \Apitude\Core\Qless\StackWorker($workerName, $useQueues, $client, $interval);
 $log = new Logger('Apitude');
 $log->pushHandler(new \Monolog\Handler\StreamHandler('php://stderr', $logLevel));
 $log->pushProcessor(new \Monolog\Processor\PsrLogMessageProcessor());
