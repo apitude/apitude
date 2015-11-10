@@ -12,10 +12,11 @@ use Apitude\Core\Provider\QlessServiceProvider;
 use Apitude\Core\Provider\ShutdownInterface;
 use Asm89\Stack\Cors;
 use Apitude\Core\Provider\RedisServiceProvider;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\StreamHandler;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class Application extends \Silex\Application
 {
@@ -169,6 +170,11 @@ class Application extends \Silex\Application
             if (php_sapi_name() === 'cli' && isset($this['config']['commands'])) {
                 $this->registerCommands($this['config']['commands']);
                 $this->registerCommands($this['base_commands']);
+                /** @var \Monolog\Logger $logger */
+                $logger = $this['logger'];
+                $handler = new StreamHandler('php://stdout');
+                $handler->setFormatter(new LineFormatter());
+                $logger->pushHandler($handler);
             }
         }
     }
