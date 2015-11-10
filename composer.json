@@ -12,6 +12,7 @@
   "prefer-stable": true,
   "bin": [
     "bin/apiworker",
+    "bin/apistackedworker",
     "bin/apicon",
     "bin/apidb"
   ],
