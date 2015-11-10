@@ -41,7 +41,16 @@ class ApiJobHandler
             return;
         }
 
-        $service->{$data['method']}($job, $data['payload']);
+        try {
+            $service->{$data['method']}($job, $data['payload']);
+        } catch(\Exception $e) {
+            if ($job->getRetriesLeft() > 0) {
+                $job->retry($job->getWorkerName(), $e->getTraceAsString());
+            } else {
+                $job->fail($job->getWorkerName(), $e->getTraceAsString());
+            }
+        }
+
         $app->shutdown();
     }
 }
