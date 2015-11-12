@@ -56,7 +56,9 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
             }
 
             if (is_array($value)) {
-                $value = $this->writeObjectArray($value);
+                if (isset($value[0]) && is_object($value[0])) {
+                    $value = $this->writeObjectArray($value);
+                }
             }
 
             if ($value instanceof Collection) {
