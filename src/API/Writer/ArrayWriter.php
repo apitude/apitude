@@ -76,10 +76,10 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
     }
 
     /**
-     * @param Collection $collection
+     * @param array $collection
      * @return array
      */
-    public function writeCollection(Collection $collection)
+    public function writeCollection($collection)
     {
         $result = [
             'count' => count($collection),
