@@ -26,6 +26,11 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
         return $this->getMetadataFactory()->getMetadataForClass(get_class($object));
     }
 
+    protected function getUser()
+    {
+        return $this->container['user'];
+    }
+
     public function writeObject($object)
     {
         $data = [];
@@ -40,6 +45,21 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
         foreach ($meta->getPropertyMetadata() as $propMeta) {
             if (!$propMeta->isExposed()) {
                 continue;
+            }
+
+            if (count($propMeta->getAccessRoles())) {
+                $exposeToUser = false;
+                $accessRoles  = $propMeta->getAccessRoles();
+
+                foreach ($this->getUser()->getRoles() as $role) {
+                    if (in_array($role, $accessRoles)) {
+                        $exposeToUser = true;
+                    }
+                }
+
+                if (!$exposeToUser) {
+                    continue;
+                }
             }
 
             if ($propMeta->getGetterMethod()) {

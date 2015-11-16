@@ -33,6 +33,7 @@ class AnnotationDriver implements DriverInterface
             $class,
             Entity\Expose::class
         );
+
         $classMetadata->setExposed($annotation !== null);
 
         // not exposed so just return here
@@ -59,6 +60,11 @@ class AnnotationDriver implements DriverInterface
                 if ($annotation->name) {
                     $propMeta->setExposedName($annotation->name);
                 }
+
+                if ($annotation->accessRoles) {
+                    $propMeta->setAccessRoles($annotation->accessRoles);
+                }
+
                 // set property renderer
                 /** @var Property\Renderer $annotation */
                 $annotation = $this->reader->getPropertyAnnotation(

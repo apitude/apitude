@@ -26,6 +26,11 @@ class PropertyMetadata extends \Metadata\PropertyMetadata
     private $exposedName;
 
     /**
+     * @var array
+     */
+    private $accessRoles = [];
+
+    /**
      * @return string
      */
     public function getClass()
@@ -101,5 +106,20 @@ class PropertyMetadata extends \Metadata\PropertyMetadata
     public function getExposedName()
     {
         return $this->exposedName ?: $this->name;
+    }
+    /**
+     * @return array
+     */
+    public function getAccessRoles()
+    {
+        return $this->accessRoles;
+    }
+
+    /**
+     * @param array $accessRoles
+     */
+    public function setAccessRoles($accessRoles)
+    {
+        $this->accessRoles = $accessRoles;
     }
 }
