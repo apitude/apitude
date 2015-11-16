@@ -13,7 +13,7 @@ trait EntityManagerAwareTrait
     /**
      * @return EntityManagerInterface
      */
-    protected function getEntityManager()
+    public function getEntityManager()
     {
         return $this->container['orm.em'];
     }
@@ -21,7 +21,7 @@ trait EntityManagerAwareTrait
     /**
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadataFactory
      */
-    protected function getMetadataFactory()
+    public function getMetadataFactory()
     {
         return $this->getEntityManager()->getMetadataFactory();
     }
