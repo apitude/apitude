@@ -5,7 +5,7 @@
  */
 /** @var \Apitude\Core\Application $app */
 if (!defined('APP_PATH')) {
-    define('APP_PATH', realpath(__DIR__.'/../../../..'));
+    define('APP_PATH', realpath(dirname($_SERVER['SCRIPT_NAME']).'/../..'));
 }
 
 if (!file_exists(APP_PATH.'/logs')) {
