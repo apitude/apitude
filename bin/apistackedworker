@@ -96,8 +96,20 @@ HELP;
 }
 
 // set options
-$server = isset($opts['server']) ? $opts['server'] : '127.0.0.1';
-$port = isset($opts['port']) ? intval($opts['port']) : 6379;
+if (isset($opts['server'])) {
+    $server = $opts['server'];
+} elseif (getenv('REDIS_HOST')) {
+    $server = getenv('REDIS_HOST');
+} else {
+    $server = '127.0.0.1';
+}
+if (isset($opts['port'])) {
+    $port = $opts['port'];
+} elseif (getenv('REDIS_PORT')) {
+    $port = getenv('REDIS_PORT');
+} else {
+    $port = 6379;
+}
 
 $interval = isset($opts['interval']) ? intval($opts['interval']) : 1;
 $queueMode = isset($opts['mode']) ? $opts['mode'] : null;
