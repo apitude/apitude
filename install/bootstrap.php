@@ -5,7 +5,11 @@ if (! file_exists(__DIR__.'/vendor/autoload.php')) {
 require_once __DIR__.'/vendor/autoload.php';
 
 if (!defined('APP_ENV')) {
-    define('APP_ENV', 'development');
+    if (getenv('APP_ENV')) {
+        define('APP_ENV', getenv('APP_ENV'));
+    } else {
+        define('APP_ENV', 'development');
+    }
 }
 
 if (!defined('APP_PATH')) {
