@@ -15,7 +15,7 @@ trait QlessAwareTrait
     /**
      * @return Client
      */
-    protected function getJobManager() {
+    function getJobManager() {
         return $this->container['qless.client'];
     }
 
@@ -27,7 +27,7 @@ trait QlessAwareTrait
      * @param null|string $method
      * @return string Job ID
      */
-    protected function addJob($queue, $payload, $service, $delay=0, $method=null) {
+    function addJob($queue, $payload, $service, $delay=0, $method=null) {
         $data = [
             'payload' => $payload,
             'service' => $service,
@@ -54,5 +54,4 @@ trait QlessAwareTrait
     function cancelJob($jid) {
         $this->getJobManager()->cancel($jid);
     }
-
 }
