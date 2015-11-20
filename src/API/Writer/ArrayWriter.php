@@ -122,10 +122,10 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
     public function writeObjectArrayWithPagination(array $array, $totalRecords, $page, $resultsPerPage)
     {
         $result = [
-            'total'            => $totalRecords,
-            'page'             => $page,
-            'results_per_page' => $resultsPerPage,
-            'data'             => [],
+            'total'          => $totalRecords,
+            'page'           => $page,
+            'resultsPerPage' => $resultsPerPage,
+            'data'           => [],
         ];
 
         $result['data'] = $this->writeObjectArray($array);
