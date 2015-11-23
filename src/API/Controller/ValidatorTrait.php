@@ -134,7 +134,7 @@ trait ValidatorTrait
     {
         return [
             'i18nKey' => method_exists($error->getConstraint(), 'getI18nKey') ?
-                $error->getConstraint()->getI18nKey() : null,
+                $error->getConstraint()->getI18nKey() : get_class($error->getConstraint()),
             'messageTemplate' => $error->getMessageTemplate(),
             'plural' => $error->getPlural(),
             'invalidValue' => $error->getInvalidValue(),
