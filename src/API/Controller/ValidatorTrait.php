@@ -133,7 +133,6 @@ trait ValidatorTrait
     private function getValidationErrorArray($error)
     {
         return [
-            // use constraint class if getI18nKey method does not exist
             'i18nKey' => method_exists($error->getConstraint(), 'getI18nKey') ?
                 $error->getConstraint()->getI18nKey() : get_class($error->getConstraint()),
             'messageTemplate' => $error->getMessageTemplate(),
