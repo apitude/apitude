@@ -1,14 +1,18 @@
 <?php
 namespace Apitude\Core\Provider;
 
+use Apitude\Core\Commands\CacheClearCommand;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\RedisCache;
 use Doctrine\Common\Cache\XcacheCache;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class CacheServiceProvider implements ServiceProviderInterface
+class CacheServiceProvider extends AbstractServiceProvider implements ServiceProviderInterface
 {
+    protected $commands = [
+        CacheClearCommand::class,
+    ];
 
     /**
      * Registers services on the given app.
@@ -19,6 +23,7 @@ class CacheServiceProvider implements ServiceProviderInterface
      */
     public function register(Application $app)
     {
+        parent::register($app);
         $app['cache'] = $app->share(function ($app) {
             $config = $app['config'];
             if (! array_key_exists('cache.driver', $config)) {
