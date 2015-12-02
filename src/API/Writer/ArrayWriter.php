@@ -51,9 +51,11 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
                 $exposeToUser = false;
                 $accessRoles  = $propMeta->getAccessRoles();
 
-                foreach ($this->getUser()->getRoles() as $role) {
-                    if (in_array($role, $accessRoles)) {
-                        $exposeToUser = true;
+                if ($this->getUser()) {
+                    foreach ($this->getUser()->getRoles() as $role) {
+                        if (in_array($role, $accessRoles)) {
+                            $exposeToUser = true;
+                        }
                     }
                 }
 
