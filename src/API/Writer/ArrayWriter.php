@@ -107,8 +107,12 @@ class ArrayWriter implements WriterInterface, ContainerAwareInterface
             'count' => count($collection),
             'data'  => [],
         ];
-        foreach ($collection as $entity) {
-            $result['data'][] = $this->writeObject($entity);
+        foreach ($collection as $key => $entity) {
+            if (!is_numeric($key)) {
+                $result['data'][$key] = $this->writeObject($entity);
+            } else {
+                $result['data'][] = $this->writeObject($entity);
+            }
         }
 
         return $result;
