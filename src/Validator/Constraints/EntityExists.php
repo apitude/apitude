@@ -30,18 +30,26 @@ class EntityExists extends Constraint implements EntityConstraintInterface
     protected $valuesCallback;
 
     /**
+     * @var string
+     */
+    protected $identifierField;
+
+    /**
      * RecordExists constructor.
      *
      * @param EntityManagerInterface $em
      * @param string $entityClass
-     * @param array $options
+     * @param array $options {valuesCallback, identifierField, message, ...}
      */
-    public function __construct(EntityManagerInterface $em, $entityClass, $options)
+    public function __construct(EntityManagerInterface $em, $entityClass, $options = [])
     {
         $this->em = $em;
         $this->entityClass = $entityClass;
         if (array_key_exists('valuesCallback', $options)) {
             $this->valuesCallback = $options['valuesCallback'];
+        }
+        if (array_key_exists('identifierField', $options)) {
+            $this->identifierField = $options['identifierField'];
         }
         parent::__construct($options);
     }
@@ -56,6 +64,9 @@ class EntityExists extends Constraint implements EntityConstraintInterface
             $values = call_user_func($this->valuesCallback, $value);
             return $this->em->getRepository($this->entityClass)
                 ->findOneBy($values);
+        } elseif ($this->identifierField) {
+            return boolval($this->em->getRepository($this->entityClass)
+                ->findOneBy([$this->identifierField => $value]));
         }
         return boolval($this->em->find($this->entityClass, $value));
     }
