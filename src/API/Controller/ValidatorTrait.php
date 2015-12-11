@@ -130,7 +130,7 @@ trait ValidatorTrait
      * @param ConstraintViolationInterface|ConstraintViolation $error
      * @return array
      */
-    protected function getValidationErrorArray($error)
+    private function getValidationErrorArray($error)
     {
         return [
             'i18nKey' => method_exists($error->getConstraint(), 'getI18nKey') ?
