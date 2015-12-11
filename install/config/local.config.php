@@ -54,4 +54,10 @@ return [
     'email' => [
         'sender' => \Apitude\Core\Email\Service\SimpleSender::class,
     ],
+
+    // see http://silex.sensiolabs.org/doc/providers/monolog.html
+    'monolog' => [
+        'name' => 'MyAppName',
+        'monolog.logfile' => APP_PATH.'/logs/app.log',
+    ]
 ];
