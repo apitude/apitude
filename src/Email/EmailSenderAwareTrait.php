@@ -6,7 +6,7 @@ trait EmailSenderAwareTrait
     /**
      * @return EmailService
      */
-    protected function getSender()
+    public function getSender()
     {
         return $this->container[EmailService::class];
     }
