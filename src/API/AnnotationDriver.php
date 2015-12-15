@@ -45,6 +45,17 @@ class AnnotationDriver implements DriverInterface
             $classMetadata->setExposedName($annotation->name);
         }
 
+        $this->parseProperties($class, $classMetadata);
+
+        while ($class = $class->getParentClass()) {
+            $this->parseProperties($class, $classMetadata);
+        }
+
+        return $classMetadata;
+    }
+
+    private function parseProperties(\ReflectionClass $class, ClassMetadata $classMetadata)
+    {
         foreach ($class->getProperties() as $reflProperty) {
             $propMeta = new PropertyMetadata($class->getName(), $reflProperty->getName());
 
@@ -105,7 +116,5 @@ class AnnotationDriver implements DriverInterface
             }
             $classMetadata->addPropertyMetadata($propMeta);
         }
-
-        return $classMetadata;
     }
 }
