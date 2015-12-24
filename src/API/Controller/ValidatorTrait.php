@@ -83,7 +83,7 @@ trait ValidatorTrait
         while (count($path) > 0) {
             $currentField = array_shift($path);
 
-            if (! array_key_exists($currentField, $currentPointer) or ! is_array($currentPointer[$currentField])) {
+            if (! array_key_exists($currentField, $currentPointer) || ! is_array($currentPointer[$currentField])) {
                 $currentPointer[$currentField] = [];
             }
 
