@@ -27,7 +27,7 @@ class APIServiceProvider extends AbstractServiceProvider
     {
         parent::register($app);
 
-        $app[MetadataFactory::class] = $app->share(function () use ($app) {
+        $app[MetadataFactory::class] = $app->share(function () {
             return new MetadataFactory(new AnnotationDriver(new AnnotationReader()));
         });
     }
