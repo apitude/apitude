@@ -2,21 +2,21 @@
 namespace Apitude\Core\API;
 
 
+use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\Entities\AbstractEntity;
-use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
 
-class EntityWriter implements ContainerAwareInterface, APIServiceAwareInterface
+class EntityWriter extends ArrayWriter
 {
     use ContainerAwareTrait;
     use APIServiceAwareTrait;
 
     /**
-     * @param AbstractEntity $entity
+     * @param AbstractEntity $object
+     * @return array
      */
-    public function getArrayForEntity($entity)
+    public function getArrayForEntity($object)
     {
-        $meta = $this->getMetadataFactory()->getMetadataFor($entity->getEntityClass());
-
+        return $this->writeObject($object);
     }
 }
