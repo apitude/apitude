@@ -4,7 +4,6 @@ namespace Apitude\Core\Provider;
 
 use Apitude\Core\API\AnnotationDriver;
 use Apitude\Core\API\Commands\GetCommand;
-use Apitude\Core\API\EntityWriter;
 use Apitude\Core\API\MetadataFactory;
 use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\API\Writer\PropertyWriter;
@@ -14,7 +13,6 @@ use Silex\Application;
 class APIServiceProvider extends AbstractServiceProvider
 {
     protected $services = [
-        EntityWriter::class,
         PropertyWriter::class,
         ArrayWriter::class,
     ];

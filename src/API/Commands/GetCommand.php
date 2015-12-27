@@ -2,7 +2,6 @@
 namespace Apitude\Core\API\Commands;
 
 
-use Apitude\Core\API\EntityWriter;
 use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\Commands\BaseCommand;
 use Doctrine\ORM\EntityManagerInterface;

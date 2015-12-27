@@ -2,6 +2,7 @@
 namespace Apitude\Core\API;
 
 
+use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\API\Writer\PropertyWriter;
 
 interface APIServiceAwareInterface
@@ -12,9 +13,9 @@ interface APIServiceAwareInterface
     function getMetadataFactory();
 
     /**
-     * @return EntityWriter
+     * @return ArrayWriter
      */
-    function getObjectWriter();
+    function getArrayWriter();
 
     /**
      * @return PropertyWriter

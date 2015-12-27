@@ -1,6 +1,7 @@
 <?php
 namespace Apitude\Core\API;
 
+use Apitude\Core\API\Writer\ArrayWriter;
 use Apitude\Core\API\Writer\PropertyWriter;
 use Apitude\Core\Application;
 
@@ -19,11 +20,11 @@ trait APIServiceAwareTrait
     }
 
     /**
-     * @return EntityWriter
+     * @return ArrayWriter
      */
-    protected function getObjectWriter()
+    protected function getArrayWriter()
     {
-        return $this->container[EntityWriter::class];
+        return $this->container[ArrayWriter::class];
     }
 
     /**
