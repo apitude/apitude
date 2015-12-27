@@ -23,10 +23,10 @@
     "dflydev/doctrine-orm-service-provider": "~1",
     "silex/silex": "~1",
     "jms/metadata": "~1",
-    "dbtlr/silex-doctrine-migrations": "dev-master",
+    "dbtlr/silex-doctrine-migrations": "~1",
     "monolog/monolog": "^1.16@dev",
     "asm89/stack-cors": "^0.2",
-    "contatta/qless-php": "dev-fixed",
+    "contatta/qless-php": "~1",
     "swiftmailer/swiftmailer": "^5.4",
     "dotblue/mandrill": "^1"
   },
