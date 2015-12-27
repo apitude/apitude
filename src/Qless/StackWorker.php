@@ -73,6 +73,11 @@ class StackWorker
         $this->logger = new NullLogger();
     }
 
+    public function getProcessType()
+    {
+        return $this->processType;
+    }
+
     public function setLogger(LoggerInterface $logger) {
         $this->logger = $logger;
     }
