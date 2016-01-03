@@ -20,6 +20,7 @@
   "require": {
     "doctrine/orm": "~2",
     "doctrine/migrations": "~1",
+    "gedmo/doctrine-extensions": "~2",
     "dflydev/doctrine-orm-service-provider": "~1",
     "silex/silex": "~1",
     "jms/metadata": "~1",
