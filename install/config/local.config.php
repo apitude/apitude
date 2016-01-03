@@ -21,6 +21,7 @@ return [
             'mappings' => []
         ]
     ],
+    // If you are using any of the gedmo extensions, register the appropriate listener classes below
     'orm.subscribers' => [],
     // Note that Migrations is NOT inside src.  This is because it does not and should not
     // contain any application logic, and therefore is separate from the application.

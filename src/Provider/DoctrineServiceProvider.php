@@ -6,10 +6,14 @@ use Apitude\Core\EntityServices\StampSubscriber;
 use Apitude\Core\ORM\SimpleHydrator;
 use Dbtlr\MigrationProvider\Provider\MigrationServiceProvider;
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
+use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\EventManager;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
+use Gedmo\DoctrineExtensions;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
@@ -55,6 +59,18 @@ class DoctrineServiceProvider extends AbstractServiceProvider implements Service
             $config = $em->getConfiguration();
             $config->setMetadataCacheImpl($app['cache']);
             $config->addCustomHydrationMode('simple', SimpleHydrator::class);
+
+            /** @var MappingDriverChain $driver */
+            $driver = $config->getMetadataDriverImpl();
+
+            // gedmo initialization
+            $reader = new AnnotationReader();
+            $cache = new CachedReader($reader, $app['cache']);
+            DoctrineExtensions::registerAbstractMappingIntoDriverChainORM(
+                $driver,
+                $cache
+            );
+
             return $em;
         });
     }
