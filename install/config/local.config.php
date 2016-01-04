@@ -9,11 +9,12 @@ return [
     // Begin DB/Doctrine config
     // Database connection options
     'db.options' => [
-        'driver' => 'pdo_mysql',
+        'driver_class' => \Apitude\Core\DBAL\MysqlPlatform::class,
         'dbname' => 'apitude',
         'user' => 'root',
         'password' => 'root',
         'host' => '127.0.0.1',
+        'charset' => 'utf8mb4', // to allow for unicode, remember to specify ascii collation on fields to be indexed!
     ],
     'orm.options' => [
         'orm.proxies_dir' => APP_PATH.'/tmp/proxies',
