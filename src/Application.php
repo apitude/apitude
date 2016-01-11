@@ -102,6 +102,11 @@ class Application extends \Silex\Application
                 $initializer($object, $this);
             }
         }
+
+        if ($object instanceof ShutdownInterface) {
+            $this->shutdownServices [] = $object;
+        }
+
         return $object;
     }
 
