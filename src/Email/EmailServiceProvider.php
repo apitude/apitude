@@ -7,6 +7,8 @@ use Apitude\Core\Email\Service\SimpleSender;
 use Apitude\Core\Provider\AbstractServiceProvider;
 use Apitude\Core\Utility\Arr;
 use Handlebars\Handlebars;
+use Handlebars\Loader\FilesystemLoader;
+use Mailgun\Mailgun;
 use Silex\Application;
 
 class EmailServiceProvider extends AbstractServiceProvider
@@ -44,13 +46,13 @@ class EmailServiceProvider extends AbstractServiceProvider
                 );
             }
             $app['handlebars'] = new Handlebars([
-                'loader' => new Handlebars\Loader\FilesystemLoader(
+                'loader' => new FilesystemLoader(
                     $config['email']['template_path'],
                     [
                         'extension' => '.hbs',
                     ]
                 ),
-                'partials_loader' => new Handlebars\Loader\FilesystemLoader(
+                'partials_loader' => new FilesystemLoader(
                     $config['email']['template_path'],
                     [
                         'prefix' => '_',
