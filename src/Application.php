@@ -2,6 +2,7 @@
 namespace Apitude\Core;
 
 use Apitude\Core\Email\EmailServiceProvider;
+use Apitude\Core\Template\TemplateServiceProvider;
 use Apitude\Core\Provider\APIServiceProvider;
 use Apitude\Core\Provider\CacheServiceProvider;
 use Apitude\Core\Provider\CommandServiceProvider;
@@ -82,6 +83,7 @@ class Application extends \Silex\Application
         $this->register(new QlessServiceProvider);
         $this->register(new EmailServiceProvider);
         $this->register(new RedisServiceProvider);
+        $this->register(new TemplateServiceProvider);
 
         $app = $this;
         $this['resolver'] = $this->share(function () use ($app) {
