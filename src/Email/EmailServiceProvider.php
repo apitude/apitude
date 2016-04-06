@@ -37,28 +37,9 @@ class EmailServiceProvider extends AbstractServiceProvider
             }
         }
         if (array_key_exists('mailgun_api_key', $config['email'])) {
-            $app['mailgun'] = new Mailgun($config['email']['mailgun_api_key']);
-            if (! Arr::path($config, 'email.template_path')) {
-                Arr::setPath(
-                    $config,
-                    'email.template_path',
-                    APP_PATH . '/templates'
-                );
-            }
-            $app['handlebars'] = new Handlebars([
-                'loader' => new FilesystemLoader(
-                    $config['email']['template_path'],
-                    [
-                        'extension' => '.hbs',
-                    ]
-                ),
-                'partials_loader' => new FilesystemLoader(
-                    $config['email']['template_path'],
-                    [
-                        'prefix' => '_',
-                    ]
-                )
-            ]);
+            $app['mailgun'] = $app->share(function ($app) {
+                return new Mailgun($config['email']['mailgun_api_key']);
+            });
         }
 
         $app['config'] = $config;
