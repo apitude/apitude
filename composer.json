@@ -30,7 +30,7 @@
     "contatta/qless-php": "~1",
     "swiftmailer/swiftmailer": "^5.4",
     "dotblue/mandrill": "^1",
-    "xamin/handlebars.php": "dev-master",
+    "xamin/handlebars.php": "^0.10",
     "mailgun/mailgun-php": "^2.0"
   },
   "require-dev": {

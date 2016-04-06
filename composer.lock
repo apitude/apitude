@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02d4feb700a0d7fceb42c6759b622874",
-    "content-hash": "cbebcf980b84d4ff75c0ff3aa701e9ac",
+    "hash": "73971a8ef6e0bed4b65139dd8cf29168",
+    "content-hash": "58391b6df3be6a501f2801df94b90c02",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2399,7 +2399,7 @@
         },
         {
             "name": "xamin/handlebars.php",
-            "version": "dev-master",
+            "version": "v0.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/XaminProject/handlebars.php.git",
@@ -3882,8 +3882,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "monolog/monolog": 20,
-        "xamin/handlebars.php": 20
+        "monolog/monolog": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
