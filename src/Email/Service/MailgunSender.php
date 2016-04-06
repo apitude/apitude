@@ -72,8 +72,13 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
             $message['bcc'] = $this->convertEmailsArrayToString($bcc);
         }
 
+        if (!preg_match('/@(.+)$/', $fromEmail, $matches)) {
+            throw new \Exception("Invalid from address: {$fromEmail}");
+        }
+        $domain = $matches[1];
+
         $this->container['mailgun']->sendMessage(
-            $this->container['config']['email']['mailgun_domain'],
+            $domain,
             $message
         );
     }
