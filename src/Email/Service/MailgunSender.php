@@ -12,6 +12,9 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
     {
         $emailStrings = array_map(
             function ($email) {
+                if (is_string($email)) {
+                    return $email;
+                }
                 return "{$email['name']} <{$email['email']}>";
             },
             $emails
