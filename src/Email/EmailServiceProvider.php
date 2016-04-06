@@ -5,7 +5,6 @@ use Apitude\Core\Email\Commands\SendMessage;
 use Apitude\Core\Email\Service\MandrillSender;
 use Apitude\Core\Email\Service\SimpleSender;
 use Apitude\Core\Provider\AbstractServiceProvider;
-use Apitude\Core\Utility\Arr;
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
 use Mailgun\Mailgun;

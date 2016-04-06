@@ -2,8 +2,10 @@
 namespace Apitude\Core\Template;
 
 use Apitude\Core\Provider\AbstractServiceProvider;
+use Apitude\Core\Utility\Arr;
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
+use Silex\Application;
 
 class TemplateServiceProvider extends AbstractServiceProvider
 {
