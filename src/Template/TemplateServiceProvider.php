@@ -14,15 +14,16 @@ class TemplateServiceProvider extends AbstractServiceProvider
         parent::register($app);
         $config = $app['config'];
 
-        $templatePathConfigPath = 'template.handlebars.path';
-        if (! Arr::path($config, $templatePathConfigPath)) {
-            Arr::setPath(
-                $config,
-                $templatePathConfigPath,
-                APP_PATH . '/templates'
-            );
-        }
         $app['handlebars'] = $app->share(function ($app) {
+            $templatePathConfigPath = 'template.handlebars.path';
+            if (! Arr::path($config, $templatePathConfigPath)) {
+                Arr::setPath(
+                    $config,
+                    $templatePathConfigPath,
+                    APP_PATH . '/templates'
+                );
+            }
+
             return new Handlebars([
                 'loader' => new FilesystemLoader(
                     Arr::path($config, $templatePathConfigPath),
