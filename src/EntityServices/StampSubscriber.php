@@ -30,7 +30,6 @@ class StampSubscriber implements EventSubscriber
         if ($entity instanceof StampEntityInterface) {
             $entity->setCreated(new \DateTime());
             $entity->setModified(new \DateTime());
-            // @TODO set create/modify user
         }
     }
 
@@ -39,7 +38,6 @@ class StampSubscriber implements EventSubscriber
         $entity = $eventArgs->getEntity();
         if ($entity instanceof StampEntityInterface) {
             $entity->setModified(new \DateTime());
-            // @TODO set modify user
         }
     }
 }
