@@ -2,11 +2,13 @@
 namespace Apitude\Core\Email;
 
 use Apitude\Core\Email\Commands\SendMessage;
+use Apitude\Core\Email\Service\MailgunSender;
 use Apitude\Core\Email\Service\MandrillSender;
 use Apitude\Core\Email\Service\SimpleSender;
 use Apitude\Core\Provider\AbstractServiceProvider;
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
+use Http\Adapter\Guzzle6\Client as HttpClient;
 use Mailgun\Mailgun;
 use Silex\Application;
 
@@ -36,8 +38,11 @@ class EmailServiceProvider extends AbstractServiceProvider
             }
         }
         if (array_key_exists('mailgun_api_key', $config['email'])) {
-            $app['mailgun'] = $app->share(function ($app) {
-                return new Mailgun($config['email']['mailgun_api_key']);
+            $app['mailgun'] = $app->share(function ($app) use ($config) {
+                return new Mailgun(
+                    $config['email']['mailgun_api_key'],
+                    new HttpClient()
+                );
             });
         }
 
