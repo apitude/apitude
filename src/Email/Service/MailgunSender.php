@@ -8,6 +8,18 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    protected function convertEmailsArrayToString($emails)
+    {
+        $emailStrings = array_map(
+            function ($email) {
+                return "{$email['name']} <{$email['email']}>";
+            },
+            $emails
+        );
+
+        return implode(',', $emailStrings);
+    }
+
     /**
      * @param array $to
      * @param string $fromEmail
@@ -43,13 +55,19 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
     function send(array $to, $fromEmail, $fromName, $subject, $body, $contentType = 'text/html', $cc = [], $bcc = [])
     {
         $message = [
-            'to' => $to,
+            'to' => $this->convertEmailsArrayToString($to),
             'from' => "{$fromName} <{$fromEmail}>",
             'subject' => $subject,
             'html' => $body,
-            'cc' => $cc,
-            'bcc' => $bcc,
         ];
+
+        if ($cc) {
+            $message['cc'] = $this->convertEmailsArrayToString($cc);
+        }
+
+        if ($bcc) {
+            $message['bcc'] = $this->convertEmailsArrayToString($bcc);
+        }
 
         $this->container['mailgun']->sendMessage(
             $this->container['config']['email']['mailgun_domain'],
