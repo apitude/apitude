@@ -33,20 +33,17 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
      * @param array  $parameters
      * @param array  $cc
      * @param array  $bcc
-     * @param bool   $inlineCss
      * @return mixed
      * @throws \Exception
      */
-    function sendTemplate(array $to, $fromEmail, $fromName, $subject, $template, $parameters = [], $cc = [], $bcc = [], $inlineCss = true)
+    function sendTemplate(array $to, $fromEmail, $fromName, $subject, $template, $parameters = [], $cc = [], $bcc = [])
     {
         $html = $this->container['handlebars']->render(
             $template,
             $parameters
         );
 
-        if ($inlineCss) {
-            $html = (new CssToInlineStyles())->convert($html);
-        }
+        $html = (new CssToInlineStyles())->convert($html);
 
         return $this->send($to, $fromEmail, $fromName, $subject, $html, 'text/html', $cc, $bcc);
     }
