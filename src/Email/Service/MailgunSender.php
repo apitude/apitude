@@ -3,6 +3,7 @@ namespace Apitude\Core\Email\Service;
 
 use Apitude\Core\Provider\ContainerAwareInterface;
 use Apitude\Core\Provider\ContainerAwareTrait;
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class MailgunSender implements SenderInterface, ContainerAwareInterface
 {
@@ -24,44 +25,51 @@ class MailgunSender implements SenderInterface, ContainerAwareInterface
     }
 
     /**
-     * @param array $to
+     * @param array  $to
      * @param string $fromEmail
      * @param string $fromName
      * @param string $subject
      * @param string $template
-     * @param array $parameters
-     * @param array $cc
-     * @param array $bcc
+     * @param array  $parameters
+     * @param array  $cc
+     * @param array  $bcc
+     * @param bool   $inlineCss
      * @return mixed
+     * @throws \Exception
      */
-    function sendTemplate(array $to, $fromEmail, $fromName, $subject, $template, $parameters = [], $cc = [], $bcc = [])
+    function sendTemplate(array $to, $fromEmail, $fromName, $subject, $template, $parameters = [], $cc = [], $bcc = [], $inlineCss = true)
     {
         $html = $this->container['handlebars']->render(
             $template,
             $parameters
         );
 
+        if ($inlineCss) {
+            $html = (new CssToInlineStyles())->convert($html);
+        }
+
         return $this->send($to, $fromEmail, $fromName, $subject, $html, 'text/html', $cc, $bcc);
     }
 
     /**
-     * @param array $to
+     * @param array  $to
      * @param string $fromEmail
      * @param string $fromName
      * @param string $subject
      * @param string $body
      * @param string $contentType
-     * @param array $cc
-     * @param array $bcc
+     * @param array  $cc
+     * @param array  $bcc
      * @return mixed
+     * @throws \Exception
      */
     function send(array $to, $fromEmail, $fromName, $subject, $body, $contentType = 'text/html', $cc = [], $bcc = [])
     {
         $message = [
-            'to' => $this->convertEmailsArrayToString($to),
-            'from' => "{$fromName} <{$fromEmail}>",
+            'to'      => $this->convertEmailsArrayToString($to),
+            'from'    => "{$fromName} <{$fromEmail}>",
             'subject' => $subject,
-            'html' => $body,
+            'html'    => $body,
         ];
 
         if ($cc) {
